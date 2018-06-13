@@ -29,6 +29,7 @@ class UCCLanguageTestLibrary(object):
         self.cpp_result["Physical Sloc"]=[]
         self.cpp_result["File Type"]=[]
         self.cpp_result["Module Name"]=[]
+        self.cpp_result['psloc_to_lsloc_ratio'] = 0
 
         self.cpp_result1 = self.cpp_result
         self.cpp_result2 = self.cpp_result
