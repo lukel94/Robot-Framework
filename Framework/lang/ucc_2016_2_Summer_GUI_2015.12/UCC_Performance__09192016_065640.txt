@@ -1,0 +1,18 @@
+ 104 files for 69.4 files processed per second
+
+     Processing  Step     :  seconds
+------------------------- : --------
+ Build file list          :      0
+Read, Analyze & Count     :      1
+ Find duplicates          :      0
+  Generate results files  :      0
+               Total time :      1 seconds
+
+    Stack Dumps:  0
+         Errors:  0
+       Warnings:  0
+    Information:  0
+Uncounted Files:  3
+
+
+UCC -dir src

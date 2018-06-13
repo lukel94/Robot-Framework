@@ -1,0 +1,7 @@
+startmacro
+while i lt 10 
+	say “^i”
+	calc i i 1 + 
+endwhile
+endmacro
+

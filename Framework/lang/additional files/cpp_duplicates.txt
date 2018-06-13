@@ -1,0 +1,105 @@
+*** Settings ***
+Library   OperatingSystem
+Library   lib/UCCLanguageTestLibrary.py
+Library   String
+
+Test Teardown    NONE
+
+*** Variables ***
+@{DEFAULT FILE LIST}    ucc_input/cc_main.cpp	ucc_input/cc_main.h  ucc_input/MainObject.cpp  ucc_input/MainObject.h   ucc_input/samplehtml.html
+
+${uccVersion1}			${CURDIR}\\version1\\UCC_2014.08f
+${uccVersion2}			${CURDIR}\\version2\\UCC_2015.12
+
+@{tear}             error_log*.txt   UCC_Performance*.txt    *.csv   *.cpp   File*.txt
+
+*** Keywords ***
+UCC Teardown with Dir
+    [Documentation]          Custom teardown for deleting directories along with temp files
+    [Arguments]              @{teardir}
+    Remove Files             @{tear}
+    :FOR     ${dir}   IN     @{teardir}
+    \    Remove Directory    ${dir}    recursive=True  
+
+*** Test Cases ***
+Setup
+    Create UCC file list    fileList.txt    @{DEFAULT FILE LIST}
+	Run ucc                 ${uccVersion1}  -i1  fileList.txt  -outdir  ${CURDIR}\\version1\\cpp_output\\counting
+	Run ucc                 ${uccVersion2}  -i1  fileList.txt  -outdir  ${CURDIR}\\version2\\cpp_output\\counting
+	Ucc parse cpp			version1  ${CURDIR}\\version1\\cpp_output\\counting
+	Ucc parse cpp			version2  ${CURDIR}\\version2\\cpp_output\\counting
+
+AT.MU.001.001  
+    [Documentation]         UCC should define duplicate files within the same baseline, if the files have the same contents with respect to logical lines of code. 
+	Ucc total lines individual		
+
+AT.MU.002.001  
+    [Documentation]         UCC should return the count results for files that have been identified as duplicates separately, per language. 
+	Ucc blank lines individual
+	
+AT.MU.003.001
+	[Documentation]			UCC should return the complexity results for files that have been identified as duplicates separately. 
+	Ucc whole comments individual
+	
+AT.MU.004.001
+	[Documentation]			UCC should return the cyclomatic complexity results for the files that have been identified as duplicates separately. 
+	Ucc whole comments individual
+	
+AT.MU.005.001
+	[Documentation]			UCC should return the cumulative duplicate files for all of the input files. 
+	Ucc embedded comments individual
+
+AT.MU.006.001
+	[Documentation]			UCC should define duplicate files within Baseline A.
+	Ucc embedded comments individual
+
+AT.MU.007.001
+	[Documentation]			UCC should define duplicate files within Baseline B.
+	Ucc embedded comments individual
+	
+AT.MC.008.001
+	[Documentation]			UCC should return the counting results for files that have been identified as duplicates within Baseline A separately, per language. 
+	Ucc embedded comments individual
+
+AT.MU.009.001
+	[Documentation]			UCC should return the counting results for files that have been identified as duplicates within Baseline B separately, per language. 
+	Ucc embedded comments individual
+	
+AT.MU.010.001
+	[Documentation]			UCC should return the complexity results for files that have been identified as duplicates within Baseline A separately, per language. 
+	Ucc embedded comments individual
+	
+AT.MU.011.001
+	[Documentation]			UCC should return the complexity results for files that have been identified as duplicates within Baseline B separately, per language. 
+	Ucc embedded comments individual
+	
+AT.MU.012.001
+	[Documentation]			UCC should return the cyclomatic complexity results for files that have been identified as duplicates within Baseline A separately, per language. 
+	Ucc embedded comments individual
+
+AT.MU.013.001
+	[Documentation]			UCC should return the cyclomatic complexity results for files that have been identified as duplicates within Baseline B separately, per language. 
+	Ucc embedded comments individual
+
+AT.MU.014.001
+	[Documentation]			UCC should return the cumulative duplicate files for all the input files for Baseline A.
+	Ucc embedded comments individual
+
+AT.MC.015.001
+	[Documentation]			UCC should return the cumulative duplicate files for all the input files for Baseline B.
+	Ucc embedded comments individual
+	
+AT.MU.016.001
+	[Documentation]			UCC should allow users to determine how close the files need to be, according to percentage between 0 to 100, for files to be considered duplicates. 
+	Ucc embedded comments individual
+
+AT.MU.017.001
+	[Documentation]			UCC should have the option to not search for duplicate files. 
+	Ucc embedded comments individual
+
+
+
+
+	
+	
+

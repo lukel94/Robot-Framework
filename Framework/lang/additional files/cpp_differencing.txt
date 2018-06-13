@@ -1,0 +1,129 @@
+*** Settings ***
+Library   OperatingSystem
+Library   lib/UCCLanguageTestLibrary.py
+Library   String
+
+Test Teardown    NONE
+
+*** Variables ***
+@{DEFAULT FILE LIST}    ucc_input/cc_main.cpp	ucc_input/cc_main.h  ucc_input/MainObject.cpp  ucc_input/MainObject.h   ucc_input/samplehtml.html
+
+${uccVersion1}			${CURDIR}\\version1\\UCC_2014.08f
+${uccVersion2}			${CURDIR}\\version2\\UCC_2015.12
+
+@{tear}             error_log*.txt   UCC_Performance*.txt    *.csv   *.cpp   File*.txt
+
+*** Keywords ***
+UCC Teardown with Dir
+    [Documentation]          Custom teardown for deleting directories along with temp files
+    [Arguments]              @{teardir}
+    Remove Files             @{tear}
+    :FOR     ${dir}   IN     @{teardir}
+    \    Remove Directory    ${dir}    recursive=True  
+
+*** Test Cases ***
+Setup
+    Create UCC file list    fileList.txt    @{DEFAULT FILE LIST}
+	Run ucc                 ${uccVersion1}  -i1  fileList.txt  -outdir  ${CURDIR}\\version1\\cpp_output\\diff
+	Run ucc                 ${uccVersion2}  -i1  fileList.txt  -outdir  ${CURDIR}\\version2\\cpp_output\\diff
+	Ucc parse cpp			version1  ${CURDIR}\\version1\\cpp_output\\diff
+	Ucc parse cpp			version2  ${CURDIR}\\version2\\cpp_output\\diff
+
+AT.MD.001.001  
+    [Documentation]         UCC should report the matching and comparison of files of two baselines (Baselines A and B) with respect to added, deleted, modified, and unmodified  logical SLOC. 
+	Ucc total lines individual		
+
+AT.MD.002.001  
+    [Documentation]         UCC should report the files matched between Baselines A and B. 
+	Ucc blank lines individual
+	
+AT.MD.003.001
+	[Documentation]			UCC should only difference on lines that were counted by the correct language parser. 
+	Ucc whole comments individual
+	
+AT.MD.004.001
+	[Documentation]			UCC should return the counting results for Baseline A before Differencing. 
+	Ucc embedded comments individual
+	
+AT.MD.005.001
+	[Documentation]			UCC should return the counting results for Baseline B before Differencing. 
+	Ucc embedded comments individual
+
+AT.MD.006.001
+	[Documentation]			UCC should return the counting results for all files in Baseline A before Differencing. 
+	Ucc embedded comments individual
+
+AT.MD.007.001
+	[Documentation]			UCC should return the counting results for all files in Baseline B before Differencing. 
+	Ucc embedded comments individual
+	
+AT.MD.008.001
+	[Documentation]			UCC should return the complexity results for Baseline A before Differencing. 
+	Ucc embedded comments individual
+
+AT.MD.009.001
+	[Documentation]			UCC should return the counting results for Baseline B before Differencing. 
+	Ucc embedded comments individual
+	
+AT.MD.010.001
+	[Documentation]			UCC should return the cyclomatic complexity results for Baseline A before Differencing. 
+	Ucc embedded comments individual
+	
+AT.MD.011.001
+	[Documentation]			UCC should return the cyclomatic complexity results for Baseline B before Differencing. 
+	Ucc embedded comments individual
+	
+AT.MD.012.001
+	[Documentation]			UCC's rules of counting for both Logical SLOC counting and Differencing should stay consistent. In other words, Baseline A's total logical SLOC = deleted + modified + unmodified, and Baseline B's total logical SLOC = new + modified + unmodified. 
+	Ucc embedded comments individual
+
+AT.MD.013.001
+	[Documentation]			UCC should consider files in Baseline A that do not match to files in Baseline B as "deleted". 
+	Ucc embedded comments individual
+
+AT.MD.014.001
+	[Documentation]			UCC should count the logical lines of code in files in Baseline A that do not match to files in Baseline B as "deleted" lines. 
+	Ucc embedded comments individual
+
+AT.MD.015.001
+	[Documentation]			UCC should consider files in Baseline B that do not match to files in Baseline A as "added".
+	Ucc embedded comments individual
+	
+AT.MD.016.001
+	[Documentation]			UCC should count the logical lines of code in files in Baseline B that do not match to files in Baseline A as "new" lines. 
+	Ucc embedded comments individual
+
+AT.MD.017.001
+	[Documentation]			UCC should consider a logical line of code in Baseline B, if different by more than the threshold percentage from the line it is being differenced with in Baseline A, "new", and the line being compared to should be considered "deleted". 
+	Ucc embedded comments individual
+
+AT.MD.018.001
+	[Documentation]			UCC should return differencing results per language.
+	Ucc embedded comments individual
+	
+AT.MD.019.001
+	[Documentation]			UCC should return the cumulative differencing results for all of the input files. 
+	Ucc embedded comments individual
+
+AT.MD.020.001
+	[Documentation]			UCC should allow users to modify the threshold percentage (between 0 to 100) of common characters between two lines from Baselines A and B, before they are counted as deleted/added lines. (The default is set to 60.)
+	Ucc embedded comments individual
+
+AT.MD.021.001
+	[Documentation]			UCC should return appropriate error messages if a user incorrectly uses the threshold percentage option. 
+	Ucc embedded comments individual
+
+AT.MD.022.001
+	[Documentation]			UCC should display visual line differences between files in Baseline A and B. 
+	Ucc embedded comments individual
+
+AT.MD.023.001
+	[Documentation]			UCC should return appropriate error messages if a user incorrectly uses the visual differencing option. 
+	Ucc embedded comments individual
+
+
+
+
+	
+	
+

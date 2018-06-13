@@ -1,0 +1,21 @@
+ A Files: 155   B Files: 155 for 56.4 files processed per second
+
+     Processing  Step     :  seconds
+------------------------- : --------
+ Build file list          :      0
+ Match baselines          :      0
+ Files comparison         :      3
+   Find A duplicates      :      0
+ Generate results A files :      0
+   Find B duplicates      :      2
+ Generate results B files :      0
+               Total time :      5 seconds
+
+    Stack Dumps:  0
+         Errors:  0
+       Warnings:  0
+    Information:  0
+Uncounted Files:  445
+
+
+UCC -d -t 30 -dir src "/Users/rishabhsharma/Downloads/GENERAL UCC/"

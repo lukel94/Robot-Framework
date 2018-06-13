@@ -1,0 +1,53 @@
+Error: dir is not a valid UCC command line argument.
+Usage: ucc [-v] [-d [-i1 fileListA] [-i2 <fileListB>] [-t <#>]] [-tdup <#>]
+           [-trunc <#>] [-cf] [-dir <dirA> [<dirB>] <fileSpecs>]
+           [-outdir <outDir>] [-extfile <extFile>] [-unified] [-ascii] [-legacy]
+           [-nodup] [-nocomplex] [-nolinks] [-help [<option>]]
+
+Options:
+ -v                 Lists the current version number.
+ -d                 Runs the differencing function.
+                      If not specified, runs the counting function.
+ -i1 <fileListA>    Filename containing filenames in the Baseline A.
+ -i2 <fileListB>    Filename containing filenames in the Baseline B.
+ -t <#>             Specifies the threshold percentage for a modified line.
+                      (DEFAULTS TO 60).
+ -visualdiff        Enables visual differencing.
+ -tdup <#>          Specifies the threshold percentage for duplicated files -
+                      the maximum percent difference between two files of the
+                      same name in a baseline to be considered duplicates.
+                      (DEFAULTS TO 0)
+ -trunc <#>         Specifies the maximum number of characters allowed in a
+                      logical SLOC. Additional characters will be truncated.
+                      (DEFAULTS TO 10,000, use 0 for no truncation)
+ -cf                Indicated that target files were retrieved from ClearCase.
+                      Restored the original filename before counting.
+ -dir               Specifies the following directories and file specifications: 
+      <dirA>          Name of the directory containing source files.
+                        If -d is given, dirA is the directory for Baseline A.
+      <dirB>          Name of the directory for Baseline B only if -d is given.
+      <fileSpecs>     File specifications, wildcard chars ? * are allowed.
+                        For example, *.cpp *.h
+ -outdir <outDir>   Specifies the directory to store the output files.
+ -extfile <extFile> Indicates language extension mapping filename
+ -unified           Prints language report files to a single unified report file.
+ -ascii             Prints ASCII text report files instead of CSV files.
+ -legacy            Prints legacy formatted ASCII text report files
+                      instead of the current format of the CSV or text files.
+ -nodup             Disables separate processing of duplicate files.
+ -nocomplex         Disables printing complexity reports or keyword counts.
+ -cc4enable         Enables Cyclomatic Complexity 4 unique condition metrics.
+ -nolinks           Disables following symbolic links to directories and files.
+ -threads <#>       Specify the number of work threads. Minimum is 2.
+                      If not specified then no work threads are created.
+ -ramlimit <#>      Specify RAM limit used for estimation of success
+                      in 100 MB increments. Minimum is 1
+                      and maximum is 5120.  10 will be about 1 GigaByte.
+                      If not specified then default is 500 MBytes RAM.
+                      If  unlikely to succeed  shows, UCC will try anyway.
+ -nowarnings        Disables warning messages on console.
+                      Warning messages will still be logged.
+                      Error messages will still show on console.
+ -nouncounted       Disables reports or messages about uncounted files.
+ -help <option>     Displays this usage or usage for a specified option.
+

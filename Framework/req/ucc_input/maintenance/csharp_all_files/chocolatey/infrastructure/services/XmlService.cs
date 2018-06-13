@@ -1,0 +1,98 @@
+﻿// Copyright © 2011 - Present RealDimensions Software, LLC
+// 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// 
+// You may obtain a copy of the License at
+// 
+// 	http://www.apache.org/licenses/LICENSE-2.0
+// 
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+namespace chocolatey.infrastructure.services
+{
+    using System.IO;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.Serialization;
+    using cryptography;
+    using filesystem;
+    using tolerance;
+
+    /// <summary>
+    ///   XML interaction
+    /// </summary>
+    public sealed class XmlService : IXmlService
+    {
+        private readonly IFileSystem _fileSystem;
+        private readonly IHashProvider _hashProvider;
+
+        public XmlService(IFileSystem fileSystem, IHashProvider hashProvider)
+        {
+            _fileSystem = fileSystem;
+            _hashProvider = hashProvider;
+        }
+
+        public XmlType deserialize<XmlType>(string xmlFilePath)
+        {
+            return FaultTolerance.try_catch_with_logging_exception(
+                () =>
+                {
+                    var xmlSerializer = new XmlSerializer(typeof(XmlType));
+                    var xmlReader = XmlReader.Create(new StringReader(_fileSystem.read_file(xmlFilePath)));
+                    if (!xmlSerializer.CanDeserialize(xmlReader))
+                    {
+                        this.Log().Warn("Cannot deserialize response of type {0}", typeof(XmlType));
+                        return default(XmlType);
+                    }
+
+                    return (XmlType)xmlSerializer.Deserialize(xmlReader);
+                },
+                "Error deserializing response of type {0}".format_with(typeof(XmlType)),
+                throwError: true);
+        }
+
+        public void serialize<XmlType>(XmlType xmlType, string xmlFilePath)
+        {
+            serialize(xmlType,xmlFilePath, isSilent: false);
+        }
+
+        public void serialize<XmlType>(XmlType xmlType, string xmlFilePath, bool isSilent)
+        {
+            _fileSystem.create_directory_if_not_exists(_fileSystem.get_directory_name(xmlFilePath));
+
+            var xmlUpdateFilePath = xmlFilePath + ".update";
+
+            FaultTolerance.try_catch_with_logging_exception(
+                () =>
+                {
+                    var xmlSerializer = new XmlSerializer(typeof(XmlType));
+                    //var textWriter = new StreamWriter(xmlUpdateFilePath, append: false, encoding: new UTF8Encoding(encoderShouldEmitUTF8Identifier: false))
+                    var textWriter = new StreamWriter(xmlUpdateFilePath, append: false, encoding: new UTF8Encoding(encoderShouldEmitUTF8Identifier: true))
+                    {
+                        AutoFlush = true
+                    };
+
+                    xmlSerializer.Serialize(textWriter, xmlType);
+                    textWriter.Flush();
+
+                    textWriter.Close();
+                    textWriter.Dispose();
+
+                    if (!_hashProvider.hash_file(xmlFilePath).is_equal_to(_hashProvider.hash_file(xmlUpdateFilePath)))
+                    {
+                        _fileSystem.copy_file(xmlUpdateFilePath, xmlFilePath, overwriteExisting: true);
+                    }
+
+                    _fileSystem.delete_file(xmlUpdateFilePath);
+                },
+                "Error serializing type {0}".format_with(typeof(XmlType)),
+                throwError: true, 
+                isSilent: isSilent);
+        }
+    }
+}

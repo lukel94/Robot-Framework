@@ -1,0 +1,5 @@
+startmacro
+foreach key INTABLE mytable
+	say "Key ^key = ^mytable.^key"
+endfor
+endmacro

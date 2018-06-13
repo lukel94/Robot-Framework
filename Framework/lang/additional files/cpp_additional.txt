@@ -1,0 +1,140 @@
+*** Settings ***
+Library   OperatingSystem
+Library   lib/UCCLanguageTestLibrary.py
+Library   String
+
+Test Teardown    NONE
+
+*** Variables ***
+@{DEFAULT FILE LIST}    ucc_input/cc_main.cpp	ucc_input/cc_main.h  ucc_input/MainObject.cpp  ucc_input/MainObject.h   ucc_input/samplehtml.html
+
+${uccVersion1}			${CURDIR}\\version1\\UCC_2014.08f
+${uccVersion2}			${CURDIR}\\version2\\UCC_2015.12
+
+@{tear}             error_log*.txt   UCC_Performance*.txt    *.csv   *.cpp   File*.txt
+
+*** Keywords ***
+UCC Teardown with Dir
+    [Documentation]          Custom teardown for deleting directories along with temp files
+    [Arguments]              @{teardir}
+    Remove Files             @{tear}
+    :FOR     ${dir}   IN     @{teardir}
+    \    Remove Directory    ${dir}    recursive=True  
+
+*** Test Cases ***
+Setup
+    Create UCC file list    fileList.txt    @{DEFAULT FILE LIST}
+	Run ucc                 ${uccVersion1}  -i1  fileList.txt  -outdir  ${CURDIR}\\version1\\cpp_output\\counting
+	Run ucc                 ${uccVersion2}  -i1  fileList.txt  -outdir  ${CURDIR}\\version2\\cpp_output\\counting
+	Ucc parse cpp			version1  ${CURDIR}\\version1\\cpp_output\\counting
+	Ucc parse cpp			version2  ${CURDIR}\\version2\\cpp_output\\counting
+
+AT.MC.001.001  
+    [Documentation]         UCC should return total number of lines of the individual input files.
+	Ucc total lines individual		
+
+AT.MC.002.001  
+    [Documentation]         UCC should return the number of blank lines in individual input files. 
+	Ucc blank lines individual
+	
+AT.MC.003.001
+	[Documentation]			UCC should return the number of whole comments in individual input files.
+	Ucc whole comments individual
+
+AT.MC.004.001
+	[Documentation]			UCC should return the number of embedded comments in individual input files.
+	Ucc embedded comments individual	
+	
+AT.MC.005.001
+	[Documentation]			UCC should return the number of compiler directive lines in individual input files. 
+	Ucc embedded comments individual
+
+AT.MC.006.001
+	[Documentation]			UCC should return the number of data declaration lines in individual input files.
+	Ucc embedded comments individual
+
+AT.MC.007.001
+	[Documentation]			UCC should return the number of executable instruction lines in individual input files.
+	Ucc embedded comments individual
+	
+AT.MC.008.001
+	[Documentation]			UCC should return the logical SLOC of the individual input files. 
+	Ucc embedded comments individual
+
+AT.MC.009.001
+	[Documentation]			UCC should return the physical SLOC of the individual input files. 
+	Ucc embedded comments individual
+	
+AT.MC.010.001
+	[Documentation]			UCC should return the total lines of all the input files. 
+	Ucc embedded comments individual
+	
+AT.MC.011.001
+	[Documentation]			UCC should return the total number of blank lines over all the input files. 
+	Ucc embedded comments individual
+	
+AT.MC.012.001
+	[Documentation]			UCC should return the total number of whole comments over all the input files.
+	Ucc embedded comments individual
+
+AT.MC.013.001
+	[Documentation]			UCC should return the total number of embedded comments over all the input files.
+	Ucc embedded comments individual
+
+AT.MC.014.001
+	[Documentation]			UCC should return the total number of compiler directive lines over all the input files. 
+	Ucc embedded comments individual
+
+AT.MC.015.001
+	[Documentation]			UCC should return the total number of data declaration lines over all the input files.
+	Ucc embedded comments individual
+	
+AT.MC.016.001
+	[Documentation]			UCC should return the total number of executable instruction lines over all the input files.
+	Ucc embedded comments individual
+
+AT.MC.017.001
+	[Documentation]			UCC should return the total logical SLOC over all the input files. 
+	Ucc embedded comments individual
+
+AT.MC.018.001
+	[Documentation]			UCC should return the total physical SLOC over all the input files. 
+	Ucc embedded comments individual
+	
+AT.MC.019.001
+	[Documentation]			UCC should return the number of input files were counted. 
+	Ucc embedded comments individual
+
+AT.MC.020.001
+	[Documentation]			UCC should return the total number of input files that were found. 
+	Ucc embedded comments individual
+
+AT.MC.021.001
+	[Documentation]			UCC should return the physical SLOC to logical SLOC ratio. 
+	Ucc embedded comments individual
+
+AT.MC.022.001
+	[Documentation]			UCC should return the number of occurrences of compiler directive keywords.
+	Ucc embedded comments individual
+
+AT.MC.023.001
+	[Documentation]			UCC should return the number of occurrences of data keywords. 
+	Ucc embedded comments individual
+
+AT.MC.024.001
+	[Documentation]			UCC should return the number of occurrences of executable keywords. 
+	Ucc embedded comments individual
+	
+AT.MC.025.001
+	[Documentation]			UCC should return counting results per language. 
+	Ucc embedded comments individual
+	
+AT.MC.026.001
+	[Documentation]			UCC should return the cumulative counting results for all of the input files. 
+	Ucc embedded comments individual
+
+
+
+	
+	
+

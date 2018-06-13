@@ -1,0 +1,7 @@
+startmacro
+if x gt 0
+	say “positive”
+else
+	say “negative”
+endif
+endmacro

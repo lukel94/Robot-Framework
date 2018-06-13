@@ -1,0 +1,5 @@
+startmacro
+loop 10 count 
+	say count
+endloop
+endmacro

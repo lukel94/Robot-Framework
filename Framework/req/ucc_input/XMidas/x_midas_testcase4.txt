@@ -1,0 +1,5 @@
+startmacro
+label loop1
+	calc x x 1 +
+if x lt y then goto loop1
+endmacro

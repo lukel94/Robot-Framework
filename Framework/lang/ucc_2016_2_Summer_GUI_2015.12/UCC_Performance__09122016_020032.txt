@@ -1,0 +1,18 @@
+ 0 files for 0.1 files processed per second
+
+     Processing  Step     :  seconds
+------------------------- : --------
+ Build file list          :      0
+Read, Analyze & Count     :      0
+ Find duplicates          :      0
+  Generate results files  :      0
+               Total time :      0 seconds
+
+    Stack Dumps:  0
+         Errors:  0
+       Warnings:  0
+    Information:  0
+Uncounted Files:  0
+
+
+UCC -dir /Users/rishabhsharma/Documents/src/ -extfile externfile

@@ -1,0 +1,81 @@
+.block{
+  color:black;
+  background-color:yellow;
+  height: 100%;
+  width:150px;
+  position : relative;
+  line-height: 50px;
+  text-indent: 10px;
+}
+.block:hover{
+  color:red;
+}
+.border-right{
+  bottom:0px;
+  right:0px; 
+  animation-name: test-height; 
+  animation-duration : 0.4s;
+  width: 1px;
+  height : 100%;
+    position: absolute;
+  display: none; 
+  background-color:red; 
+
+}
+.block:hover .border-top,
+.block:hover .border-bottom,
+.block:hover .border-right,
+.block:hover .border-left,
+.block:hover .block:after
+{
+  display: block;
+}
+.border-left{
+  animation-name: test-height;
+  animation-duration : 0.4s;
+  top: 0px;
+  left:0px;
+  width: 1px;
+  height : 100%;
+} 
+.border-right{
+  
+}
+.border-top{
+  top:0px;
+  right:0px;
+  animation-name: test;  
+  animation-duration : 0.2s;
+  height: 1px;
+  width : 100%;
+}
+.border-bottom{  
+  bottom:0px;
+  left:0px;
+  animation-name: test;  
+  animation-duration : 0.2s;
+  height: 1px; 
+  width:100%;
+}
+.br{
+  position: absolute;
+  display: none; 
+  background-color:red; 
+}
+
+@keyframes test-height{
+  from{
+    height: 50%;
+  }
+  to{
+     height : 100%;
+  }
+}
+@keyframes test{
+  from{
+    width : 0%;
+  }
+  to{
+    width : 100%;
+  }
+}
