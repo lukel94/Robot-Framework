@@ -76,7 +76,7 @@ Test Teardown    NONE
 @{BASELINE VHDL}			lang/ucc_input/VHDL/input_two
 @{BASELINE COLDFUSIONSCRIPT}			lang/ucc_input/coldfusionscript/input_two
 @{BASELINE SCALA}			lang/ucc_input/Scala/input_two
-@{ucc}  ucc_executables/UCC
+@{ucc}  ucc_executables/ucc-j.jar
 
 
 @{tear}             error_log*.txt   UCC_Performance*.txt    *.csv   *.cpp   File*.txt
@@ -92,242 +92,245 @@ UCC Teardown with Dir
 *** Test Cases ***
 Setup Cpp
     Create UCC file list    fileList.txt    @{DEFAULT CPP FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}cpp_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}cpp_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT CPP FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE CPP}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}cpp_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}cpp_output${/}diff
 
 
 Setup C
 	Create UCC file list    fileList.txt    @{DEFAULT C FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}c_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}c_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT C FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE C}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}c_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}c_output${/}diff
 
 Setup Css
 	Create UCC file list    fileList.txt    @{DEFAULT CSS FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}css_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}css_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT CSS FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE CSS}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}css_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}css_output${/}diff
 
 Setup Java
 	Create UCC file list    fileList.txt    @{DEFAULT JAVA FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}java_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}java_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT JAVA FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE JAVA}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}java_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}java_output${/}diff
 
 Setup JSP
 	Create UCC file list    fileList.txt    @{DEFAULT JSP FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}jsp_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}jsp_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT JSP FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE JSP}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}jsp_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}jsp_output${/}diff
 
 Setup Html
 	Create UCC file list    fileList.txt    @{DEFAULT HTML FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}html_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}html_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT HTML FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE HTML}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}html_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}html_output${/}diff
 
 Setup Python
 	Create UCC file list    fileList.txt    @{DEFAULT PYTHON FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}python_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}python_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT PYTHON FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE PYTHON}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}python_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}python_output${/}diff
 
 Setup Perl
 	Create UCC file list    fileList.txt    @{DEFAULT PERL FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}perl_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}perl_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT PERL FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE PERL}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}perl_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}perl_output${/}diff
 
 Setup Bash
 	Create UCC file list    fileList.txt    @{DEFAULT BASH FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}bash_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}bash_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT BASH FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE BASH}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}bash_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}bash_output${/}diff
 
 Setup C#
 	Create UCC file list    fileList.txt    @{DEFAULT Cs FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}c#_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}c#_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT Cs FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE Cs}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}c#_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}c#_output${/}diff
 
 Setup JS
 	Create UCC file list    fileList.txt    @{DEFAULT JS FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}javascript_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}javascript_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT JS FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE JS}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}javascript_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}javascript_output${/}diff
 
 Setup SQL
 	Create UCC file list    fileList.txt    @{DEFAULT SQL FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}sql_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}sql_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT SQL FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE SQL}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}sql_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}sql_output${/}diff
 
 Setup MATLAB
 	Create UCC file list    fileList.txt    @{DEFAULT MATLAB FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}matlab_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}matlab_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT MATLAB FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE MATLAB}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}matlab_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}matlab_output${/}diff
 
 Setup PHP
 	Create UCC file list    fileList.txt    @{DEFAULT PHP FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}php_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}php_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT PHP FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE PHP}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}php_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}php_output${/}diff
 
 Setup Ruby
 	Create UCC file list    fileList.txt    @{DEFAULT RUBY FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}ruby_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}ruby_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT RUBY FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE RUBY}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}ruby_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}ruby_output${/}diff
 
 Setup XML
 	Create UCC file list    fileList.txt    @{DEFAULT XML FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}xml_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}xml_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT XML FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE XML}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}xml_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}xml_output${/}diff
 
 Setup BAT
 	Create UCC file list    fileList.txt    @{DEFAULT BAT FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}batch_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}batch_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT BAT FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE BAT}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}batch_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}batch_output${/}diff
 
 Setup Cshell
 	Create UCC file list    fileList.txt    @{DEFAULT CSH FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}cshell_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}cshell_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT CSH FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE CSH}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}cshell_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}cshell_output${/}diff
 
 Setup ASP
 	Create UCC file list    fileList.txt    @{DEFAULT ASP FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}asp_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}asp_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT ASP FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE ASP}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}asp_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}asp_output${/}diff
 
 Setup VB
 	Create UCC file list    fileList.txt    @{DEFAULT VB FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}vb_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}vb_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT VB FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE VB}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}vb_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}vb_output${/}diff
 
 Setup VBSCRIPT
 	Create UCC file list    fileList.txt    @{DEFAULT VBSCRIPT FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}vbscript_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}vbscript_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT VBSCRIPT FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE VBSCRIPT}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}vbscript_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}vbscript_output${/}diff
 
 Setup ADA
 	Create UCC file list    fileList.txt    @{DEFAULT ADA FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}ada_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}ada_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT ADA FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE ADA}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}ada_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}ada_output${/}diff
 
 Setup ASSEMBLY
 	Create UCC file list    fileList.txt    @{DEFAULT ASSEMBLY FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}assembly_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}assembly_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT ASSEMBLY FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE ASSEMBLY}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}assembly_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}assembly_output${/}diff
 
 Setup VERILOG
 	Create UCC file list    fileList.txt    @{DEFAULT VERILOG FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}verilog_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}verilog_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT VERILOG FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE VERILOG}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}verilog_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}verilog_output${/}diff
 
 Setup IDL
 	Create UCC file list    fileList.txt    @{DEFAULT IDL FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}idl_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}idl_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT IDL FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE IDL}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}idl_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}idl_output${/}diff
 
 Setup PASCAL
 	Create UCC file list    fileList.txt    @{DEFAULT PASCAL FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}pascal_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}pascal_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT PASCAL FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE PASCAL}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}pascal_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}pascal_output${/}diff
 
 Setup MAKEFILES
 	Create UCC file list    fileList.txt    @{DEFAULT MAKEFILES FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}makefiles_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}makefiles_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT MAKEFILES FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE MAKEFILES}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}makefiles_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}makefiles_output${/}diff
 
 Setup COLDFUSION
 	Create UCC file list    fileList.txt    @{DEFAULT COLDFUSION FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}coldfusion_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}coldfusion_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT COLDFUSION FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE COLDFUSION}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}coldfusion_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}coldfusion_output${/}diff
 
 Setup FORTRAN
 	Create UCC file list    fileList.txt    @{DEFAULT FORTRAN FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}fortran_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}fortran_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT FORTRAN FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE FORTRAN}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}fortran_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}fortran_output${/}diff
 
 Setup NEXTMIDAS
 	Create UCC file list    fileList.txt    @{DEFAULT NEXTMIDAS FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}nextmidas_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}nextmidas_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT NEXTMIDAS FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE NEXTMIDAS}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}nextmidas_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}nextmidas_output${/}diff
 
 Setup XMIDAS
 	Create UCC file list    fileList.txt    @{DEFAULT XMIDAS FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}xmidas_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}xmidas_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT XMIDAS FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE XMIDAS}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}xmidas_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}xmidas_output${/}diff
 
 Setup VHDL
 	Create UCC file list    fileList.txt    @{DEFAULT VHDL FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}vhdl_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}vhdl_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT VHDL FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE VHDL}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}vhdl_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}vhdl_output${/}diff
 
 Setup COLDFUSIONSCRIPT
 	Create UCC file list    fileList.txt    @{DEFAULT COLDFUSIONSCRIPT FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}coldfusionscript_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}coldfusionscript_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT COLDFUSIONSCRIPT FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE COLDFUSIONSCRIPT}
-	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}coldfusionscript_output${/}diff
+	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}coldfusionscript_output${/}diff
 
 Setup SCALA
 	Create UCC file list    fileList.txt    @{DEFAULT SCALA FILE LIST}
-	Run ucc                 @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}scala_output${/}counting
+	Run ucc                 java  -jar  @{ucc}  -i1  fileList.txt  -outdir  output${/}tmp${/}version2${/}scala_output${/}counting
 	Create UCC file list    fileListA.txt    @{DEFAULT SCALA FILE LIST}
 	Create UCC file list    fileListB.txt    @{BASELINE SCALA}
-ucc_parse_cpp	Run ucc                 @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}scala_output${/}diff
+ucc_parse_cpp	Run ucc                 java  -jar  @{ucc}  -d   -i1  fileListA.txt  -i2   fileListB.txt   -outdir   output${/}tmp${/}version2${/}scala_output${/}diff
+
+
+
     Run     rm -rf file*.txt
 
 
@@ -630,5 +633,8 @@ AT.MA.013.001
 AT.MA.014.001
     [Documentation]			UCC should allow users not to process or report complexity or cyclomatic complexity results.
 	Ucc embedded comments individual
+
+
+
     Run    mv *.csv output/tmp
 

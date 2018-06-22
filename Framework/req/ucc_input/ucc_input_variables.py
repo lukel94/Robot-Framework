@@ -95,7 +95,7 @@ UCC_INTEGRATION = ['ucc_test_suites/ucc_executables/UCC_integration_test_team']
 UCC_CC = ['ucc_test_suites/ucc_executables/UCC_base']
 """
 
-UCC_BASE = ['ucc_executables/UCC']
+UCC_BASE = ['ucc_executables/ucc-j.java']
 
 
 DIRECTORY = [
