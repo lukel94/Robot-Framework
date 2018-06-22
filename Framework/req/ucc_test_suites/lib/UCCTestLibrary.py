@@ -8,6 +8,10 @@ import zipfile
 import shutil
 import glob
 import time
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 
 logger = open("../logs.txt", "a")
 
