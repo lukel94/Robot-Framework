@@ -66,7 +66,7 @@ class UCCTestLibrary(object):
             if real_time > limit:
                 raise Exception("Time limit exceeded. Execution time was '%s' and limit was '%s'."
                     % (str(real_time) , str(limit) )
-				)
+                )
 
 
     def _parse_matched_pairs_file(self):
@@ -81,7 +81,7 @@ class UCCTestLibrary(object):
     def _parse_output_files(self, fn):
         with open(fn,'r') as fh:
             csvr = csv.reader(fh)
-            rows = list(csvr)[11:]
+            rows = list(csvr)[13:]
             clist = []
             for row in rows:
                 if len(row) > 10 and row[9] == 'CODE':

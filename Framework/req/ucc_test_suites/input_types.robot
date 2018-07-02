@@ -28,7 +28,7 @@ AT.IT.003.001
     ...              fileList.txt are not listed one per line
     Create default file list     @{IN_SAME_LINE1}
     Run UCC    java  -jar  @{UCC BASE}
-    Response should contain     Error: Unable to open file
+    Response should contain     No valid files found for processing with UCC-G
 
 AT.IT.003.002
     [Documentation]  UCC should generate error message if input files in
@@ -37,14 +37,16 @@ AT.IT.003.002
     Create UCC File List     File List A.txt    FileA1.cpp
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Run UCC   java  -jar  @{UCC BASE}               -d  -i1  File List A.txt  -i2  fileList.txt
-    Response should contain     Error: Unable to open file
+    Response should contain     Invalid file list: fileList.txt.
 
 AT.IT.004.001
     [Documentation]  UCC should not require delimiters (other than new line)
     ...              in fileList.txt.
     Create default file list     ${DELIMITED FILE LIST}
-
-    Response should contain     Error: Unable to open file
+    Create UCC File List     File List A.txt    FileA1.cpp
+    Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
+    Run UCC   java  -jar  @{UCC BASE}               -d  -i1  File List A.txt  -i2  fileList.txt
+    Response should contain     Invalid file list: fileList.txt.
 
 AT.IT.005.001
     [Documentation]  UCC should allow periods in the file names listed in
@@ -57,7 +59,7 @@ AT.IT.005.001
 AT.IT.006.001
     [Documentation]  UCC should allow underscores in the file names listed
     ...              in fileList.txt.
-    Create default file list	@{UNDERSCORE DEFAULT FILE LIST}
+    Create default file list @{UNDERSCORE DEFAULT FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
     Default Output should contain   C_CPP  cc_main.cpp
@@ -65,14 +67,14 @@ AT.IT.006.001
 AT.IT.007.001
     [Documentation]  UCC should allow spaces in the file names listed in
     ...              fileList.txt.
-    Create default file list	@{SPACE DEFAULT FILE LIST}
+    Create default file list @{SPACE DEFAULT FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
 
 AT.IT.007.002
     [Documentation]  UCC should allow spaces in the file names together with files
     ...              which don't have spaces in file names listed in fileList.txt.
-    Create default file list	ucc_input/cc_main.cpp  ucc_input/test/cc main.cpp
+    Create default file list    req/ucc_input/cc_main.cpp  req/ucc_input/test/cc main.cpp
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
 
@@ -89,7 +91,7 @@ AT.IT.008.002
     ...              provided the files listed in fileList.txt are
     ...              specified using full paths.
     Create full path default file list     @{COUNT DEFAULT FILE LIST}
-    Add to default file list	@{DEFAULT FILE LIST}
+    Add to default file list @{DEFAULT FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
 
@@ -105,30 +107,30 @@ AT.IT.009.001
 AT.IT.010.001
     [Documentation]  UCC should allow periods in the file paths listed in
     ...              fileList.txt.
-    Create default file list     ucc_input/test/sub.dir/MainObject.cpp  ucc_input/test/sub.dir/MainObject.
+    Create default file list    req/ucc_input/cc_main.cpp  req/ucc_input/test/cc main.cpp
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
 
 AT.IT.010.002
     [Documentation]  UCC should allow periods in the file paths listed in
     ...              fileList.txt.
-    Create default file list     ucc_input/test/sub.dir/MainObject.cpp  ucc_input/cc_main.cpp
+    Create default file list     req/ucc_input/test/sub.dir/MainObject.cpp  req/ucc_input/cc_main.cpp
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
 
 AT.IT.011.001
     [Documentation]  UCC should allow underscores in the file paths listed
     ...              in fileList.txt.
-    Create default file list     ucc_input/test/sub_dir/MainObject.cpp
-    ...  ucc_input/test/sub_dir/MainObject.h
+    Create default file list     req/ucc_input/test/sub_dir/MainObject.cpp
+    ...  req/ucc_input/test/sub_dir/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
 
 AT.IT.011.002
     [Documentation]  UCC should allow hyphens in the file paths listed
     ...              in fileList.txt.
-    Create default file list     ucc_input/test/sub-dir/MainObject.cpp
-    ...  ucc_input/test/sub-dir/MainObject.h
+    Create default file list     req/ucc_input/test/sub-dir/MainObject.cpp
+    ...  req/ucc_input/test/sub-dir/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
 
@@ -136,16 +138,16 @@ AT.IT.011.002
 AT.IT.012.001
     [Documentation]  UCC should allow spaces in the file paths listed in
     ...              fileList.txt.
-    Create default file list     ucc_input/test/sub dir/MainObject.cpp
-    ...  ucc_input/test/sub dir/MainObject.h
+    Create default file list     req/ucc_input/test/sub dir/MainObject.cpp
+    ...  req/ucc_input/test/sub dir/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
 
 AT.IT.012.002
     [Documentation]  UCC should allow numerics in the file paths listed in
     ...              fileList.txt.
-    Create default file list     ucc_input/test/sub4dir/MainObject.cpp
-    ...  ucc_input/test/sub4dir/MainObject.h
+    Create default file list     req/ucc_input/test/sub4dir/MainObject.cpp
+    ...  req/ucc_input/test/sub4dir/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
 
@@ -153,39 +155,39 @@ AT.IT.013.001
     [Documentation]  If UCC is unable to find any files specified in
     ...              fileList.txt due to incorrect file names or invalid
     ...              paths, UCC should return appropriate error messages.
-    Create default file list     ucc_input/test/sub_dir/MainObject.cpp
-    ...  ucc_input/test/sub_dir/invalid_file.h
+    Create default file list     req/ucc_input/test/sub_dir1/MainObject.cpp
+    ...  req/ucc_input/test/sub_dir1/invalid_file.h
     Run UCC    java  -jar  @{UCC BASE}
-    Response should contain     Error: Unable to open file
+    Response should contain     No valid files found for processing with UCC-G
 
 AT.IT.013.002
     [Documentation]  In case UCC is unable to find any files specified in
     ...              fileList.txt due to illegitimate file names or paths
     ...              , UCC should return appropriate error messages.
-    Create default file list     ucc_input/test/sub()dir/MainObject.cpp
-    ...  ucc_input/test/sub()dir/MainObject.h
+    Create default file list     req/ucc_input/test/sub()dir/MainObject.cpp
+    ...  req/ucc_input/test/sub()dir/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}
     Response should contain     Error: Unable to open file with illegitimate names or paths
 
 AT.IT.014.001
     [Documentation]  UCC should allow users to specify a custom file list
-    Create UCC file list    customFileList.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    customFileList.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}             -i1  customFileList.txt
     File should exist   outfile_summary.csv
 
 AT.IT.014.002
     [Documentation]  UCC should allow users to specify a custom file list to have a directory in the list and recursively counts files in it.
-    Create UCC file list    customFileList.txt  ucc_input
+    Create UCC file list    customFileList.txt  req/ucc_input
     Run UCC    java  -jar  @{UCC BASE}             -i1  customFileList.txt
     File should exist   outfile_summary.csv
 
 AT.IT.015.001
     [Documentation]  UCC should find the custom file list provided a full
     ...              path is specified.
-    Create UCC file list    ucc_input/test/customFileList.txt  ucc_input/
-    ...  MainObject.cpp  ucc_input/MainObject.h
-    ${ret} =  Get absolute path  ucc_input/test/customFileList.txt
+    Create UCC file list    req/ucc_input/test/customFileList.txt  req/ucc_input/
+    ...  MainObject.cpp  req/ucc_input/MainObject.h
+    ${ret} =  Get absolute path  req/ucc_input/test/customFileList.txt
     Run UCC    java  -jar  @{UCC BASE}             -i1  ${ret}
     File should exist   outfile_summary.csv
 
@@ -193,17 +195,17 @@ AT.IT.016.001
     [Documentation]  UCC should find the custom file list provided a
     ...              relative path is specified, with
     ...              respect to the executable's location.
-    Create UCC file list    ucc_input/test/customFileList.txt  ucc_input/
-    ...  MainObject.cpp  ucc_input/MainObject.h
-    Run UCC    java  -jar  @{UCC BASE}             -i1  ucc_input/test/customFileList.txt
+    Create UCC file list    req/ucc_input/test/customFileList.txt  req/ucc_input/
+    ...  MainObject.cpp  req/ucc_input/MainObject.h
+    Run UCC    java  -jar  @{UCC BASE}             -i1  req/ucc_input/test/customFileList.txt
     File should exist   outfile_summary.csv
 
 
 AT.IT.017.001
     [Documentation]  UCC should accept custom file with
     ...              a custom file name, provided that it is specified.
-    Create UCC file list    customFileList.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    customFileList.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}            -i1  customFileList.txt
     File should exist   outfile_summary.csv
 
@@ -211,24 +213,24 @@ AT.IT.018.001
     [Documentation]  UCC should recognize the input files listed in the
     ...              custom file list provided that the files
     ...              are listed one per line.
-    Create UCC file list    customFileList.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    customFileList.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}             -i1  customFileList.txt
     File should exist   outfile_summary.csv
 
 AT.IT.019.001
     [Documentation]          Multiple filenames listed in same line for custom file list.
-    Create UCC file list single   customFileList.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list single   customFileList.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Run UCC  java  -jar  @{UCC BASE}                -i1  customFileList.txt
-    Is UCC Response Error    Error: Unable to open file (ucc_input/MainObject.cpp ucc_input/MainObject.h)
+    Response should contain    No valid files found for processing with UCC-G
 
 AT.IT.020.001
     [Documentation]  UCC should not require delimiters (other than new line) for custom file list.
     ...              in fileList.txt.
     Create UCC file list    customFileList.txt  ${DELIMITED FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}              -i1  customFileList.txt
-    Response should contain     Error: Unable to open file
+    Response should contain     No valid files found for processing with UCC-G
 
 AT.IT.021.001
     [Documentation]  UCC should allow periods in the file names listed in
@@ -270,26 +272,22 @@ AT.IT.025.001
 
 AT.IT.026.001
     [Documentation]  UCC should allow periods in the custom file list name
-    Create UCC file list    custom.file.list.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    custom.file.list.txt  @{COUNT DEFAULT FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -i1  custom.file.list.txt
     File should exist   outfile_summary.csv
 
 AT.IT.027.001
     [Documentation]  UCC should allow underscores in the custom file list name
-    Create UCC file list    custom_file_list.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    custom_file_list.txt  @{COUNT DEFAULT FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -i1  custom_file_list.txt
     File should exist   outfile_summary.csv
 
 
 AT.IT.028.001
-    [Documentation]          Allow spaces in the custom file list name.
-    Create UCC File List     File List A.txt    FileA1.cpp
-    Copy File                @{COUNTSET7.filelist}[0]   FileA1.cpp
-    Run UCC  java  -jar  @{UCC BASE}                -i1  File List A.txt
-    Response status check    0  0  0  0  0
-    UCC Count Results         @{COUNTSET7.counts}
+    [Documentation]  UCC should Allow spaces in the custom file list name.
+    Create UCC File List     custom file list.txt    @{COUNT DEFAULT FILE LIST}
+    Run UCC    java  -jar  @{UCC BASE}             -i1  custom file list.txt
+    File should exist   outfile_summary.csv
 
 
 
@@ -298,7 +296,6 @@ AT.IT.029.001
     Create UCC File List     FileListA.txt      FileA1.cpp
     Copy File                @{COUNTSET7.filelist}[0]   FileA1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -i1  ${EXECDIR}${/}FileListA.txt
-    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -309,7 +306,6 @@ AT.IT.030.001
     Create UCC File List     Test${/}FileListA.txt      FileA1.cpp
     Copy File                @{COUNTSET7.filelist}[0]   FileA1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -i1  Test${/}FileListA.txt
-    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -320,7 +316,6 @@ AT.IT.031.001
     Create UCC File List     Test.1${/}FileListA.txt      FileA1.cpp
     Copy File                @{COUNTSET7.filelist}[0]   FileA1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -i1  Test.1${/}FileListA.txt
-    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -331,7 +326,6 @@ AT.IT.032.001
     Create UCC File List     Test_1${/}FileListA.txt      FileA1.cpp
     Copy File                @{COUNTSET7.filelist}[0]   FileA1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -i1  Test_1${/}FileListA.txt
-    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -342,31 +336,31 @@ AT.IT.033.001
     Create UCC File List     Test 1${/}FileListA.txt      FileA1.cpp
     Copy File                @{COUNTSET7.filelist}[0]   FileA1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -i1  Test 1${/}FileListA.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Count Results         @{COUNTSET7.counts}
 
 AT.IT.034.002
     [Documentation]  If UCC is unable to find any files specified in
     ...              custom file list due to incorrect file names or invalid
     ...              paths, UCC should return appropriate error messages.
-    Create UCC File List    customFileList.txt  ucc_input/test/sub_dir/MainObject.cpp
-    ...  ucc_input/test/sub_dir/invalid_file.h
+    Create UCC File List    customFileList.txt  req/ucc_input/test/sub_dir/MainObject.cpp
+    ...  req/ucc_input/test/sub_dir/invalid_file.h
     Run UCC    java  -jar  @{UCC BASE}       -i1      customFileList.txt
-    Response should contain     Error: Unable to open file
+    Response should contain     No valid files found for processing with UCC-G
 
 AT.IT.034.003
     [Documentation]  If UCC is unable to find any files specified in
     ...              custom file list due to incorrect file names or invalid
     ...              paths, UCC should return appropriate error messages.
-    Create UCC File List    customFileList.txt  ucc_input/test/sub_dir/Main Object.cpp
+    Create UCC File List    customFileList.txt  req/ucc_input/test/sub_dir/Main Object.cpp
     Run UCC    java  -jar  @{UCC BASE}       -i1      customFileList.txt
-    Response should contain     Error: Unable to open file
+    Response should contain     No valid files found for processing with UCC-G
 
 AT.IT.035.001
     [Documentation]          Error when invalid filenames specified for custom file list.
     Remove File              FileListA.txt
     Run UCC    java  -jar  @{UCC BASE}                  -i1  FileListA.txt
-    Is UCC Response Error    Error: -i1 \ Unable to open Baseline A file (FileListA.txt)
+    Is UCC Response Error    Error reading file
 
 
 
@@ -377,7 +371,7 @@ AT.IT.036.001
     Create Directory         Adir
     Copy File                @{COUNTSET7.filelist}[0]   Adir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir
-    Response Status Check    0  0  0  0  0
+
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -389,7 +383,7 @@ AT.IT.037.001
     Create Directory         Adir
     Copy File                @{COUNTSET7.filelist}[0]   Adir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir
-    Response Status Check    0  0  0  0  0
+
     UCC Count Results         @{COUNTSET7.counts}
 
 AT.IT.038.001
@@ -398,7 +392,7 @@ AT.IT.038.001
     Create Directory         Adir
     Copy File                @{COUNTSET7.filelist}[0]   Adir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  ${EXECDIR}${/}Adir
-    Response Status Check    0  0  0  0  0
+
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -410,7 +404,7 @@ AT.IT.039.001
     Create Directory         Test${/}Adir
     Copy File                @{COUNTSET7.filelist}[0]   Test${/}Adir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Test${/}Adir
-    Response Status Check    0  0  0  0  0
+
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -420,7 +414,7 @@ AT.IT.040.001
     Create Directory         A.dir
     Copy File                @{COUNTSET7.filelist}[0]   A.dir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  A.dir
-    Response Status Check    0  0  0  0  0
+
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -430,7 +424,7 @@ AT.IT.041.001
     Create Directory         A_dir
     Copy File                @{COUNTSET7.filelist}[0]   A_dir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  A_dir
-    Response Status Check    0  0  0  0  0
+
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -440,7 +434,7 @@ AT.IT.042.001
     Create Directory         A dir
     Copy File                @{COUNTSET7.filelist}[0]   A dir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  A dir
-    Response Status Check    0  0  0  0  0
+
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -450,7 +444,7 @@ AT.IT.043.001
     Create Directory         Adir
     Copy File                @{COUNTSET7.filelist}[0]   Adir${/}File.A.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir
-    Response Status Check    0  0  0  0  0
+
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -460,7 +454,7 @@ AT.IT.044.001
     Create Directory         Adir
     Copy File                @{COUNTSET7.filelist}[0]   Adir${/}File_A.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir
-    Response Status Check    0  0  0  0  0
+
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -470,7 +464,7 @@ AT.IT.045.001
     Create Directory         Adir
     Copy File                @{COUNTSET7.filelist}[0]   Adir${/}File A.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir
-    Response Status Check    0  0  0  0  0
+
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -479,7 +473,7 @@ AT.IT.046.001
     [Documentation]          Error when invalid directory is specified.
     Remove Directory         Adir  recursive=True
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir
-    Is UCC Response Error    Error: -dir \ Invalid Baseline A directory: (Adir) either not found or not a directory.
+    Is UCC Response Error    No files found at directory path
 
 
 
@@ -490,7 +484,7 @@ AT.IT.047.001
     Copy File                @{DIFFSET4.fileAlist}[0]   Adir${/}FileA.c
     Copy File                @{DIFFSET4.fileAlist}[1]   Adir${/}FileA.h
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir  *.cpp
-    Response Status Check    0  0  0  0  0
+
     Default Output should not contain   C_CPP  FileA.c  FileB.c   FileA.h   FileB.h
     Default Output should contain   C_CPP  FileA.cpp
     UCC Count Results         @{COUNTSET7.counts}
@@ -542,7 +536,7 @@ AT.IT.053.001
     Create baseline A file list     ${DELIMITED FILE LIST}
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}     -d
-    Response should contain     Error: Unable to open file
+    Response should contain     No valid files found for processing with UCC-G
 
 AT.IT.054.001
     [Documentation]  UCC should not require delimiters (other than new line)
@@ -550,12 +544,12 @@ AT.IT.054.001
     Create baseline A file list     @{BASELINE B FILE LIST}
     Create baseline B file list     ${DELIMITED FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}     -d
-    Response should contain     Error: Unable to open file
+    Response should contain     No valid files found for processing with UCC-G
 
 AT.IT.055.001
     [Documentation]  UCC should allow periods in the file names listed in
     ...              fileListA.txt.
-    Create baseline A file list     ucc_input/test/cc.main.cpp  ucc_input/test/cc.main.h
+    Create baseline A file list     req/ucc_input/test/cc.main.cpp  req/ucc_input/test/cc.main.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d
     Baseline A output should contain    cc.main.cpp  cc.main.h
@@ -564,15 +558,15 @@ AT.IT.056.001
     [Documentation]  UCC should allow periods in the file names listed in
     ...              fileListB.txt.
     Create baseline A file list     @{BASELINE B FILE LIST}
-    Create baseline B file list     ucc_input/test/cc.main.cpp
-    ...  ucc_input/test/cc.main.h
+    Create baseline B file list     req/ucc_input/test/cc.main.cpp
+    ...  req/ucc_input/test/cc.main.h
     Run UCC    java  -jar  @{UCC BASE}             -d
     Baseline B output should contain    cc.main.cpp  cc.main.h
 
 AT.IT.057.001
     [Documentation]  UCC should allow underscores in the file names listed
     ...              in fileListA.txt.
-    Create baseline A file list  ucc_input/cc_main.cpp  ucc_input/cc_main.h
+    Create baseline A file list  	req/ucc_input/cc_main.cpp  req/ucc_input/cc_main.h
     Create baseline B file list  @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}     -d
     Baseline A output should contain    cc_main.cpp     cc_main.h
@@ -581,16 +575,16 @@ AT.IT.058.001
     [Documentation]  UCC should allow underscores in the file names listed
     ...              in fileListB.txt.
     Create baseline A file list     @{BASELINE A FILE LIST}
-    Create baseline B file list     ucc_input/cc_main.cpp
-    ...  ucc_input/cc_main.h
+    Create baseline B file list     req/ucc_input/cc_main.cpp
+    ...  req/ucc_input/cc_main.h
     Run UCC    java  -jar  @{UCC BASE}     -d
     Baseline B output should contain    cc_main.cpp     cc_main.h
 
 AT.IT.059.001
     [Documentation]  UCC should allow spaces in the file names listed in
     ...              fileListA.txt.
-    Create baseline A file list     ucc_input/test/cc main.cpp
-    ...  ucc_input/test/cc main.h
+    Create baseline A file list     req/ucc_input/test/cc main.cpp
+    ...  req/ucc_input/test/cc main.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d
     Baseline A output should contain    cc main.cpp  cc main.h
@@ -599,8 +593,8 @@ AT.IT.060.001
     [Documentation]  UCC should allow spaces in the file names listed in
     ...              fileListB.txt.
     Create baseline A file list     @{BASELINE B FILE LIST}
-    Create baseline B file list     ucc_input/test/cc main.cpp
-    ...  ucc_input/test/cc main.h
+    Create baseline B file list     req/ucc_input/test/cc main.cpp
+    ...  req/ucc_input/test/cc main.h
     Run UCC    java  -jar  @{UCC BASE}             -d
     Baseline B output should contain    cc main.cpp  cc main.h
 
@@ -646,7 +640,7 @@ AT.IT.064.001
 AT.IT.065.001
     [Documentation]  UCC should allow periods in the file paths listed in
     ...              fileListA.txt.
-    Create baseline A file list     ucc_input/test/sub.dir/MainObject.cpp  ucc_input/test/sub.dir/MainObject.h
+    Create baseline A file list     req/ucc_input/test/sub.dir/MainObject.cpp  req/ucc_input/test/sub.dir/MainObject.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d
     Baseline A output should contain    MainObject.cpp  MainObject.h
@@ -655,16 +649,16 @@ AT.IT.066.001
     [Documentation]  UCC should allow periods in the file paths listed in
     ...              fileListB.txt.
     Create baseline A file list     @{BASELINE A FILE LIST}
-    Create baseline B file list     ucc_input/test/sub.dir/MainObject.cpp
-    ...  ucc_input/test/sub.dir/MainObject.h
+    Create baseline B file list    req/ucc_input/test/sub.dir/MainObject.cpp
+    ...  req/ucc_input/test/sub.dir/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}             -d
     Baseline B output should contain    MainObject.cpp  MainObject.h
 
 AT.IT.067.001
     [Documentation]  UCC should allow underscores in the file paths listed
     ...              in fileListA.txt.
-    Create baseline A file list     ucc_input/test/sub_dir/MainObject.cpp
-    ...  ucc_input/test/sub_dir/MainObject.h
+    Create baseline A file list     req/ucc_input/test/sub_dir/MainObject.cpp
+    ...  req/ucc_input/test/sub_dir/MainObject.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d
     Baseline A output should contain    MainObject.cpp  MainObject.h
@@ -673,16 +667,16 @@ AT.IT.068.001
     [Documentation]  UCC should allow underscores in the file paths listed
     ...              in fileListB.txt.
     Create baseline A file list     @{BASELINE A FILE LIST}
-    Create baseline B file list     ucc_input/test/sub_dir/MainObject.cpp
-    ...  ucc_input/test/sub_dir/MainObject.h
+    Create baseline B file list     req/ucc_input/test/sub_dir/MainObject.cpp
+    ...  req/ucc_input/test/sub_dir/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}             -d
     Baseline B output should contain    MainObject.cpp  MainObject.h
 
 AT.IT.069.001
     [Documentation]  UCC should allow spaces in the file paths listed in
     ...              fileListA.txt.
-    Create baseline A file list     ucc_input/test/sub dir/MainObject.cpp
-    ...  ucc_input/test/sub dir/MainObject.h
+    Create baseline A file list     req/ucc_input/test/sub dir/MainObject.cpp
+    ...  req/ucc_input/test/sub dir/MainObject.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d
     Baseline A output should contain    MainObject.cpp  MainObject.h
@@ -691,8 +685,8 @@ AT.IT.070.001
     [Documentation]  UCC should allow spaces in the file paths listed in
     ...              fileListB.txt.
     Create baseline A file list     @{BASELINE A FILE LIST}
-    Create baseline B file list     ucc_input/test/sub dir/MainObject.cpp
-    ...  ucc_input/test/sub dir/MainObject.h
+    Create baseline B file list     req/ucc_input/test/sub dir/MainObject.cpp
+    ...  req/ucc_input/test/sub dir/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}             -d
     Baseline B output should contain    MainObject.cpp  MainObject.h
 
@@ -700,8 +694,8 @@ AT.IT.071.001
     [Documentation]  If UCC is unable to find any files specified in
     ...              fileListA.txt due to incorrect file names or invalid
     ...              paths, UCC should return appropriate error messages.
-    Create baseline A file list     ucc_input/test/sub_dir/MainObject.cpp
-    ...  ucc_input/test/sub_dir/invalid_file.h
+    Create baseline A file list     req/ucc_input/test/sub_dir/MainObject.cpp
+    ...  req/ucc_input/test/sub_dir/invalid_file.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d
     Response should contain     Error: Unable to open file
@@ -711,16 +705,16 @@ AT.IT.072.001
     ...              fileListB.txt due to incorrect file names or invalid
     ...              paths, UCC should return appropriate error messages.
     Create baseline A file list     @{BASELINE A FILE LIST}
-    Create baseline B file list     ucc_input/test/sub_dir/MainObject.cpp
-    ...  ucc_input/test/sub_dir/invalid_file.h
+    Create baseline B file list     req/ucc_input/test/sub_dir/MainObject.cpp
+    ...  req/ucc_input/test/sub_dir/invalid_file.h
     Run UCC    java  -jar  @{UCC BASE}             -d
     Response should contain     Error: Unable to open file
 
 AT.IT.073.001
     [Documentation]  UCC should allow users to specify custom file lists for
     ...              Baseline A and/or Baseline B.
-    Create UCC file list    customFileList.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    customFileList.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d  -i1  customFileList.txt  -i2  fileListB.txt
     Baseline A output should contain    MainObject.cpp  MainObject.h
@@ -729,9 +723,9 @@ AT.IT.073.001
 AT.IT.074.001
     [Documentation]  UCC should find the custom file list provided for
     ...              Baseline A provided a full path is specified.
-    Create UCC file list    ucc_input/test/customFileList.txt  ucc_input/
-    ...  MainObject.cpp  ucc_input/MainObject.h
-    ${ret} =  Get absolute path  ucc_input/test/customFileList.txt
+    Create UCC file list    req/ucc_input/test/customFileList.txt  req/ucc_input/
+    ...  MainObject.cpp  req/ucc_input/MainObject.h
+    ${ret} =  Get absolute path  req/ucc_input/test/customFileList.txt
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d  -i1  ${ret}  -i2  fileListB.txt
     Baseline A output should contain    MainObject.cpp  MainObject.h
@@ -740,9 +734,9 @@ AT.IT.074.001
 AT.IT.075.001
     [Documentation]  UCC should find the custom file list provided for
     ...              Baseline B provided a full path is specified.
-    Create UCC file list    ucc_input/test/customFileList.txt  ucc_input/
-    ...  MainObject.cpp  ucc_input/MainObject.h
-    ${ret} =  Get absolute path  ucc_input/test/customFileList.txt
+    Create UCC file list    req/ucc_input/test/customFileList.txt  req/ucc_input/
+    ...  MainObject.cpp  req/ucc_input/MainObject.h
+    ${ret} =  Get absolute path  req/ucc_input/test/customFileList.txt
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d  -i1  fileListB.txt  -i2  ${ret}
     Baseline A output should contain    MainObject.cpp  MainObject.h
@@ -752,10 +746,10 @@ AT.IT.076.001
     [Documentation]  UCC should find the custom file list provided for
     ...              Baseline A provided a relative path is specified, with
     ...              respect to the executable's location.
-    Create UCC file list    ucc_input/test/customFileList.txt  ucc_input/
-    ...  MainObject.cpp  ucc_input/MainObject.h
+    Create UCC file list    req/ucc_input/test/customFileList.txt  req/ucc_input/
+    ...  MainObject.cpp  req/ucc_input/MainObject.h
     Create baseline B file list     @{BASELINE B FILE LIST}
-    Run UCC    java  -jar  @{UCC BASE}             -d  -i1  ucc_input/test/customFileList.txt  -i2
+    Run UCC    java  -jar  @{UCC BASE}             -d  -i1  req/ucc_input/test/customFileList.txt  -i2
     ...  fileListB.txt
     Baseline A output should contain    MainObject.cpp  MainObject.h
     Baseline B output should contain    MainObject.cpp  MainObject.h  sema.h
@@ -765,18 +759,18 @@ AT.IT.077.001
     ...              Baseline B provided a relative path is specified, with
     ...              respect to the executable's location.
     Create baseline A file list     @{BASELINE A FILE LIST}
-    Create UCC file list    ucc_input/test/customFileList.txt  ucc_input/
-    ...  MainObject.cpp  ucc_input/MainObject.h
+    Create UCC file list    req/ucc_input/test/customFileList.txt  req/ucc_input/
+    ...  MainObject.cpp  req/ucc_input/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}             -d  -i1  fileListA.txt  -i2
-    ...  ucc_input/test/customFileList.txt
+    ...  req/ucc_input/test/customFileList.txt
     Baseline A output should contain    MainObject.cpp  MainObject.h  main.cpp
     Baseline B output should contain    MainObject.cpp  MainObject.h
 
 AT.IT.078.001
     [Documentation]  UCC should accept custom file list for Baseline A with
     ...              a custom file name, provided that it is specified.
-    Create UCC file list    customFileList.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    customFileList.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d  -i1  customFileList.txt  -i2  fileListB.txt
     Baseline A output should contain    MainObject.cpp  MainObject.h
@@ -785,8 +779,8 @@ AT.IT.079.001
     [Documentation]  UCC should accept custom file list for Baseline B with
     ...              a custom file name, provided that it is specified.
     Create baseline A file list     @{BASELINE A FILE LIST}
-    Create UCC file list    customFileList.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    customFileList.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}             -d  -i2  customFileList.txt  -i1  fileListA.txt
     Baseline B output should contain    MainObject.cpp  MainObject.h
 
@@ -794,8 +788,8 @@ AT.IT.080.001
     [Documentation]  UCC should recognize the input files listed in the
     ...              custom file list for Baseline A provided that the files
     ...              are listed one per line.
-    Create UCC file list    customFileList.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    customFileList.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d  -i1  customFileList.txt  -i2  fileListB.txt
     Baseline A output should contain    MainObject.cpp  MainObject.h
@@ -805,8 +799,8 @@ AT.IT.081.001
     ...              custom file list for Baseline B provided that the files
     ...              are listed one per line.
     Create baseline A file list     @{BASELINE A FILE LIST}
-    Create UCC file list    customFileList.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    customFileList.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}             -d  -i2  customFileList.txt  -i1  fileListA.txt
     Baseline B output should contain    MainObject.cpp  MainObject.h
 
@@ -814,7 +808,7 @@ AT.IT.082.001
     [Documentation]  UCC should not require delimiters (other than new line)
     ...              in the custom file list for Baseline A.
     Create UCC file list    customFileList.txt
-    ...  ucc_input/MainObject.cpp;ucc_input/MainObject.h
+    ...  req/ucc_input/MainObject.cpp;ucc_input/MainObject.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d  -i1  customFileList.txt  -i2  fileListB.txt
     Response should contain     Error: Unable to open file
@@ -824,7 +818,7 @@ AT.IT.083.001
     ...              in the custom file list for Baseline B.
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create UCC file list    customFileList.txt
-    ...  ucc_input/MainObject.cpp;ucc_input/MainObject.h
+    ...  req/ucc_input/MainObject.cpp;ucc_input/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}             -d  -i2  customFileList.txt  -i1  fileListA.txt
     Response should contain     Error: Unable to open file
 
@@ -914,8 +908,8 @@ AT.IT.093.001
 
 AT.IT.094.001
     [Documentation]  UCC should allow periods in the custom file list name for Baseline A.
-    Create UCC file list    custom.file.list.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    custom.file.list.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d  -i1  custom.file.list.txt  -i2  fileListB.txt
     Baseline A output should contain    MainObject.cpp  MainObject.h
@@ -923,15 +917,15 @@ AT.IT.094.001
 AT.IT.095.001
     [Documentation]  UCC should allow periods in the custom file list name for Baseline B.
     Create baseline A file list     @{BASELINE A FILE LIST}
-    Create UCC file list    custom.file.list.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    custom.file.list.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}             -d  -i2  custom.file.list.txt  -i1  fileListA.txt
     Baseline B output should contain    MainObject.cpp  MainObject.h
 
 AT.IT.096.001
     [Documentation]  UCC should allow underscores in the custom file list name for Baseline A.
-    Create UCC file list    custom_file_list.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    custom_file_list.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d  -i1  custom_file_list.txt  -i2  fileListB.txt
     Baseline A output should contain    MainObject.cpp  MainObject.h
@@ -939,8 +933,8 @@ AT.IT.096.001
 AT.IT.097.001
     [Documentation]  UCC should allow underscores in the custom file list name for Baseline B.
     Create baseline A file list     @{BASELINE A FILE LIST}
-    Create UCC file list    custom_file_list.txt  ucc_input/MainObject.cpp
-    ...  ucc_input/MainObject.h
+    Create UCC file list    custom_file_list.txt  req/ucc_input/MainObject.cpp
+    ...  req/ucc_input/MainObject.h
     Run UCC    java  -jar  @{UCC BASE}             -d  -i2  custom_file_list.txt  -i1  fileListA.txt
     Baseline B output should contain    MainObject.cpp  MainObject.h
 
@@ -951,7 +945,7 @@ AT.IT.098.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC   java  -jar  @{UCC BASE}               -d  -i1  File List A.txt  -i2  FileListB.txt
-    Response status check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.098.002
@@ -961,7 +955,7 @@ AT.IT.098.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC   java  -jar  @{UCC BASE}               -d  -i1  File List A.txt  -i2  FileListB.txt
-    Response status check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.099.001
@@ -971,7 +965,7 @@ AT.IT.099.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC   java  -jar  @{UCC BASE}               -d  -i1  FileListA.txt  -i2  File List B.txt
-    Response status check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.099.002
@@ -981,7 +975,7 @@ AT.IT.099.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC   java  -jar  @{UCC BASE}               -d  -i1  FileListA.txt  -i2  File List B.txt
-    Response status check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.100.001
@@ -1015,7 +1009,7 @@ AT.IT.102.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  ${EXECDIR}${/}FileListA.txt  -i2  FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.102.002
@@ -1025,7 +1019,7 @@ AT.IT.102.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  ${EXECDIR}${/}FileListA.txt  -i2  FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.103.001
@@ -1035,7 +1029,7 @@ AT.IT.103.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  ${EXECDIR}${/}FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.103.002
@@ -1045,7 +1039,7 @@ AT.IT.103.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  ${EXECDIR}${/}FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.104.001
@@ -1056,7 +1050,7 @@ AT.IT.104.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test${/}FileListA.txt  -i2  FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.104.002
@@ -1067,7 +1061,7 @@ AT.IT.104.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test${/}FileListA.txt  -i2  FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.105.001
@@ -1078,7 +1072,7 @@ AT.IT.105.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test${/}FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.105.002
@@ -1089,7 +1083,7 @@ AT.IT.105.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test${/}FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.106.001
@@ -1100,7 +1094,7 @@ AT.IT.106.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test.1${/}FileListA.txt  -i2  FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.106.002
@@ -1111,7 +1105,7 @@ AT.IT.106.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test.1${/}FileListA.txt  -i2  FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.107.001
@@ -1122,7 +1116,7 @@ AT.IT.107.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test.1${/}FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.107.002
@@ -1133,7 +1127,7 @@ AT.IT.107.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test.1${/}FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.108.001
@@ -1144,7 +1138,7 @@ AT.IT.108.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test_1${/}FileListA.txt  -i2  FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.108.002
@@ -1155,7 +1149,7 @@ AT.IT.108.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test_1${/}FileListA.txt  -i2  FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.109.001
@@ -1166,7 +1160,7 @@ AT.IT.109.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test_1${/}FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.109.002
@@ -1177,7 +1171,7 @@ AT.IT.109.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test_1${/}FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.110.001
@@ -1188,7 +1182,7 @@ AT.IT.110.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test 1${/}FileListA.txt  -i2  FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.110.002
@@ -1199,7 +1193,7 @@ AT.IT.110.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test 1${/}FileListA.txt  -i2  FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.111.001
@@ -1210,7 +1204,7 @@ AT.IT.111.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test 1${/}FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.111.002
@@ -1221,15 +1215,15 @@ AT.IT.111.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test 1${/}FileListB.txt
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.112.001
     [Documentation]          If UCC is unable to find any files specified in custom file list
     ...                      for Baseline A due to incorrect file names or invalid paths,
     ...                      UCC should return appropriate error messages.
-    Create UCC File List    customFileList.txt  ucc_input/test/sub_dir/MainObject.cpp
-    ...  ucc_input/test/sub_dir/invalid_file.h
+    Create UCC File List    customFileList.txt  req/ucc_input/test/sub_dir/MainObject.cpp
+    ...  req/ucc_input/test/sub_dir/invalid_file.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d  -i1  customFileList.txt  -i2  fileListB.txt
     Response should contain     Error: Unable to open file
@@ -1239,8 +1233,8 @@ AT.IT.112.002
     ...                      for Baseline B due to incorrect file names or invalid paths,
     ...                      UCC should return appropriate error messages.
     Create baseline A file list     @{BASELINE A FILE LIST}
-    Create UCC File List    customFileList.txt  ucc_input/test/sub_dir/MainObject.cpp
-    ...  ucc_input/test/sub_dir/invalid_file.h
+    Create UCC File List    customFileList.txt  req/ucc_input/test/sub_dir/MainObject.cpp
+    ...  req/ucc_input/test/sub_dir/invalid_file.h
     Run UCC    java  -jar  @{UCC BASE}             -d  -i2  customFileList.txt  -i1  fileListA.txt
     Response should contain     Error: Unable to open file
 
@@ -1267,7 +1261,7 @@ AT.IT.115.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.116.001
@@ -1277,7 +1271,7 @@ AT.IT.116.001
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.117.001
@@ -1287,7 +1281,7 @@ AT.IT.117.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  ${EXECDIR}${/}Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.117.002
@@ -1297,7 +1291,7 @@ AT.IT.117.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  ${EXECDIR}${/}Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.118.001
@@ -1307,7 +1301,7 @@ AT.IT.118.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  ${EXECDIR}${/}Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.118.002
@@ -1317,7 +1311,7 @@ AT.IT.118.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  ${EXECDIR}${/}Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.119.001
@@ -1328,7 +1322,7 @@ AT.IT.119.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Test${/}Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Test${/}Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.119.002
@@ -1339,7 +1333,7 @@ AT.IT.119.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Test${/}Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Test${/}Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.120.001
@@ -1350,7 +1344,7 @@ AT.IT.120.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Test${/}Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Test${/}Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.120.002
@@ -1361,7 +1355,7 @@ AT.IT.120.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Test${/}Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Test${/}Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.121.001
@@ -1371,7 +1365,7 @@ AT.IT.121.001
     Copy File                @{DIFFSET2.fileAlist}[0]   A.dir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  A.dir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.121.002
@@ -1381,7 +1375,7 @@ AT.IT.121.002
     Copy File                @{DIFFSET1.fileAlist}[0]   A.dir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  A.dir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.122.001
@@ -1391,7 +1385,7 @@ AT.IT.122.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   B.dir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  B.dir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.122.002
@@ -1401,7 +1395,7 @@ AT.IT.122.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   B.dir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  B.dir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.123.001
@@ -1411,7 +1405,7 @@ AT.IT.123.001
     Copy File                @{DIFFSET2.fileAlist}[0]   A_dir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  A_dir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.123.002
@@ -1421,7 +1415,7 @@ AT.IT.123.002
     Copy File                @{DIFFSET1.fileAlist}[0]   A_dir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  A_dir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.124.001
@@ -1431,7 +1425,7 @@ AT.IT.124.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   B_dir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  B_dir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.124.002
@@ -1441,7 +1435,7 @@ AT.IT.124.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   B_dir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  B_dir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.125.001
@@ -1451,7 +1445,7 @@ AT.IT.125.001
     Copy File                @{DIFFSET2.fileAlist}[0]   A dir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  A dir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.125.002
@@ -1461,7 +1455,7 @@ AT.IT.125.002
     Copy File                @{DIFFSET1.fileAlist}[0]   A dir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  A dir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.126.001
@@ -1471,7 +1465,7 @@ AT.IT.126.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   B dir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  B dir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.126.002
@@ -1481,7 +1475,7 @@ AT.IT.126.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   B dir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  B dir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.127.001
@@ -1491,7 +1485,7 @@ AT.IT.127.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}File.A.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.127.002
@@ -1501,7 +1495,7 @@ AT.IT.127.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}File.A.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.128.001
@@ -1511,7 +1505,7 @@ AT.IT.128.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}File.B.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.128.002
@@ -1521,7 +1515,7 @@ AT.IT.128.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}File.B.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.129.001
@@ -1531,7 +1525,7 @@ AT.IT.129.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}File_A.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.129.002
@@ -1541,7 +1535,7 @@ AT.IT.129.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}File_A.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.130.001
@@ -1551,7 +1545,7 @@ AT.IT.130.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}File_B.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.130.002
@@ -1561,7 +1555,7 @@ AT.IT.130.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}File_B.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.131.001
@@ -1571,7 +1565,7 @@ AT.IT.131.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}File A.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.131.002
@@ -1581,7 +1575,7 @@ AT.IT.131.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}File A.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.132.001
@@ -1591,7 +1585,7 @@ AT.IT.132.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}File B.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.132.002
@@ -1601,7 +1595,7 @@ AT.IT.132.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}File B.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Response Status Check    0  0  0  0  0
+
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.133.001
@@ -1631,7 +1625,7 @@ AT.IT.135.001
     Copy File                @{DIFFSET4.fileAlist}[1]   Adir${/}FileA.h
     Copy File                @{DIFFSET4.fileBlist}[1]   Bdir${/}FileB.h
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir   *.cpp
-    Response Status Check    0  0  0  0  0
+
     Baseline A Output should not contain   FileA.c  FileB.c   FileA.h   FileB.h
     Baseline B Output should not contain   FileA.c  FileB.c   FileA.h   FileB.h
     Baseline A Output should contain   FileA.cpp
@@ -1649,7 +1643,7 @@ AT.IT.135.002
     Copy File                @{DIFFSET3.fileAlist}[1]   Adir${/}FileA.h
     Copy File                @{DIFFSET3.fileBlist}[1]   Bdir${/}FileB.h
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir   *.cpp
-    Response Status Check    0  0  0  0  0
+
     Baseline A Output should not contain   FileA.c  FileB.c   FileA.h   FileB.h
     Baseline B Output should not contain   FileA.c  FileB.c   FileA.h   FileB.h
     Baseline A Output should contain   FileA.cpp
@@ -1667,7 +1661,7 @@ AT.IT.135.003
     Copy File                @{DIFFSET4.fileAlist}[1]   Adir${/}FileA.h
     Copy File                @{DIFFSET4.fileBlist}[1]   Bdir${/}FileB.h
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir   *.?
-    Response Status Check    0  0  0  0  0
+
     Baseline A Output should contain   FileA.c  FileA.h
     Baseline B Output should contain   FileB.c  FileB.h
     Baseline A Output should not contain   FileA.cpp
@@ -1685,10 +1679,10 @@ AT.IT.135.004
     Copy File                @{DIFFSET3.fileAlist}[1]   Adir${/}FileA.h
     Copy File                @{DIFFSET3.fileBlist}[1]   Bdir${/}FileB.h
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir   *.?
-    Response Status Check    0  0  0  0  0
+
     Baseline A Output should contain   FileA.c  FileA.h
     Baseline B Output should contain   FileB.c  FileB.h
     Baseline A Output should not contain   FileA.cpp
     Baseline B Output should not contain   FileB.cpp
     UCC Diff Results         @{DIFFSET3.counts}
-#vim:tw=0:wm=0:nowrap
+vim:tw=0:wm=0:nowrap
