@@ -59,7 +59,7 @@ AT.IT.005.001
 AT.IT.006.001
     [Documentation]  UCC should allow underscores in the file names listed
     ...              in fileList.txt.
-    Create default file list @{UNDERSCORE DEFAULT FILE LIST}
+    Create default file list    @{UNDERSCORE DEFAULT FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
     Default Output should contain   C_CPP  cc_main.cpp
@@ -67,7 +67,7 @@ AT.IT.006.001
 AT.IT.007.001
     [Documentation]  UCC should allow spaces in the file names listed in
     ...              fileList.txt.
-    Create default file list @{SPACE DEFAULT FILE LIST}
+    Create default file list    @{SPACE DEFAULT FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
 
@@ -91,7 +91,7 @@ AT.IT.008.002
     ...              provided the files listed in fileList.txt are
     ...              specified using full paths.
     Create full path default file list     @{COUNT DEFAULT FILE LIST}
-    Add to default file list @{DEFAULT FILE LIST}
+    Add to default file list    @{DEFAULT FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}
     File should exist   outfile_summary.csv
 
@@ -287,6 +287,7 @@ AT.IT.028.001
     [Documentation]  UCC should Allow spaces in the custom file list name.
     Create UCC File List     custom file list.txt    @{COUNT DEFAULT FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -i1  custom file list.txt
+    Response status check    0  0  0  0  0
     File should exist   outfile_summary.csv
 
 
@@ -296,6 +297,7 @@ AT.IT.029.001
     Create UCC File List     FileListA.txt      FileA1.cpp
     Copy File                @{COUNTSET7.filelist}[0]   FileA1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -i1  ${EXECDIR}${/}FileListA.txt
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -306,6 +308,7 @@ AT.IT.030.001
     Create UCC File List     Test${/}FileListA.txt      FileA1.cpp
     Copy File                @{COUNTSET7.filelist}[0]   FileA1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -i1  Test${/}FileListA.txt
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -316,6 +319,7 @@ AT.IT.031.001
     Create UCC File List     Test.1${/}FileListA.txt      FileA1.cpp
     Copy File                @{COUNTSET7.filelist}[0]   FileA1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -i1  Test.1${/}FileListA.txt
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -326,6 +330,7 @@ AT.IT.032.001
     Create UCC File List     Test_1${/}FileListA.txt      FileA1.cpp
     Copy File                @{COUNTSET7.filelist}[0]   FileA1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -i1  Test_1${/}FileListA.txt
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -336,7 +341,7 @@ AT.IT.033.001
     Create UCC File List     Test 1${/}FileListA.txt      FileA1.cpp
     Copy File                @{COUNTSET7.filelist}[0]   FileA1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -i1  Test 1${/}FileListA.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 AT.IT.034.002
@@ -371,7 +376,7 @@ AT.IT.036.001
     Create Directory         Adir
     Copy File                @{COUNTSET7.filelist}[0]   Adir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir
-
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -383,7 +388,7 @@ AT.IT.037.001
     Create Directory         Adir
     Copy File                @{COUNTSET7.filelist}[0]   Adir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir
-
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 AT.IT.038.001
@@ -392,7 +397,7 @@ AT.IT.038.001
     Create Directory         Adir
     Copy File                @{COUNTSET7.filelist}[0]   Adir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  ${EXECDIR}${/}Adir
-
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -404,7 +409,7 @@ AT.IT.039.001
     Create Directory         Test${/}Adir
     Copy File                @{COUNTSET7.filelist}[0]   Test${/}Adir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Test${/}Adir
-
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -424,7 +429,7 @@ AT.IT.041.001
     Create Directory         A_dir
     Copy File                @{COUNTSET7.filelist}[0]   A_dir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  A_dir
-
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -434,7 +439,7 @@ AT.IT.042.001
     Create Directory         A dir
     Copy File                @{COUNTSET7.filelist}[0]   A dir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  A dir
-
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -444,7 +449,7 @@ AT.IT.043.001
     Create Directory         Adir
     Copy File                @{COUNTSET7.filelist}[0]   Adir${/}File.A.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir
-
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -454,7 +459,7 @@ AT.IT.044.001
     Create Directory         Adir
     Copy File                @{COUNTSET7.filelist}[0]   Adir${/}File_A.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir
-
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -464,7 +469,7 @@ AT.IT.045.001
     Create Directory         Adir
     Copy File                @{COUNTSET7.filelist}[0]   Adir${/}File A.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir
-
+    Response Status Check    0  0  0  0  0
     UCC Count Results         @{COUNTSET7.counts}
 
 
@@ -484,7 +489,7 @@ AT.IT.047.001
     Copy File                @{DIFFSET4.fileAlist}[0]   Adir${/}FileA.c
     Copy File                @{DIFFSET4.fileAlist}[1]   Adir${/}FileA.h
     Run UCC    java  -jar  @{UCC BASE}                  -dir  Adir  *.cpp
-
+    Response Status Check    0  0  0  0  0
     Default Output should not contain   C_CPP  FileA.c  FileB.c   FileA.h   FileB.h
     Default Output should contain   C_CPP  FileA.cpp
     UCC Count Results         @{COUNTSET7.counts}
@@ -945,7 +950,7 @@ AT.IT.098.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC   java  -jar  @{UCC BASE}               -d  -i1  File List A.txt  -i2  FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.098.002
@@ -955,7 +960,7 @@ AT.IT.098.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC   java  -jar  @{UCC BASE}               -d  -i1  File List A.txt  -i2  FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.099.001
@@ -965,7 +970,7 @@ AT.IT.099.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC   java  -jar  @{UCC BASE}               -d  -i1  FileListA.txt  -i2  File List B.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.099.002
@@ -975,7 +980,7 @@ AT.IT.099.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC   java  -jar  @{UCC BASE}               -d  -i1  FileListA.txt  -i2  File List B.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.100.001
@@ -1009,7 +1014,7 @@ AT.IT.102.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  ${EXECDIR}${/}FileListA.txt  -i2  FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.102.002
@@ -1019,7 +1024,7 @@ AT.IT.102.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  ${EXECDIR}${/}FileListA.txt  -i2  FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.103.001
@@ -1029,7 +1034,7 @@ AT.IT.103.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  ${EXECDIR}${/}FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.103.002
@@ -1039,7 +1044,7 @@ AT.IT.103.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  ${EXECDIR}${/}FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.104.001
@@ -1050,7 +1055,7 @@ AT.IT.104.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test${/}FileListA.txt  -i2  FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.104.002
@@ -1061,7 +1066,7 @@ AT.IT.104.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test${/}FileListA.txt  -i2  FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.105.001
@@ -1072,7 +1077,7 @@ AT.IT.105.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test${/}FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.105.002
@@ -1083,7 +1088,7 @@ AT.IT.105.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test${/}FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.106.001
@@ -1094,7 +1099,7 @@ AT.IT.106.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test.1${/}FileListA.txt  -i2  FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.106.002
@@ -1105,7 +1110,7 @@ AT.IT.106.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test.1${/}FileListA.txt  -i2  FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.107.001
@@ -1116,7 +1121,7 @@ AT.IT.107.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test.1${/}FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.107.002
@@ -1127,7 +1132,7 @@ AT.IT.107.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test.1${/}FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.108.001
@@ -1138,7 +1143,7 @@ AT.IT.108.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test_1${/}FileListA.txt  -i2  FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.108.002
@@ -1149,7 +1154,7 @@ AT.IT.108.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test_1${/}FileListA.txt  -i2  FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.109.001
@@ -1160,7 +1165,7 @@ AT.IT.109.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test_1${/}FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.109.002
@@ -1171,7 +1176,7 @@ AT.IT.109.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test_1${/}FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.110.001
@@ -1182,7 +1187,7 @@ AT.IT.110.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test 1${/}FileListA.txt  -i2  FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.110.002
@@ -1193,7 +1198,7 @@ AT.IT.110.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  Test 1${/}FileListA.txt  -i2  FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.111.001
@@ -1204,7 +1209,7 @@ AT.IT.111.001
     Copy File                @{DIFFSET2.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test 1${/}FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.111.002
@@ -1215,7 +1220,7 @@ AT.IT.111.002
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB2.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  Test 1${/}FileListB.txt
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.112.001
@@ -1261,7 +1266,7 @@ AT.IT.115.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.116.001
@@ -1271,7 +1276,7 @@ AT.IT.116.001
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.117.001
@@ -1281,7 +1286,7 @@ AT.IT.117.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  ${EXECDIR}${/}Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.117.002
@@ -1291,7 +1296,7 @@ AT.IT.117.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  ${EXECDIR}${/}Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.118.001
@@ -1301,7 +1306,7 @@ AT.IT.118.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  ${EXECDIR}${/}Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.118.002
@@ -1311,7 +1316,7 @@ AT.IT.118.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  ${EXECDIR}${/}Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.119.001
@@ -1322,7 +1327,7 @@ AT.IT.119.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Test${/}Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Test${/}Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.119.002
@@ -1333,7 +1338,7 @@ AT.IT.119.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Test${/}Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Test${/}Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.120.001
@@ -1344,7 +1349,7 @@ AT.IT.120.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Test${/}Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Test${/}Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.120.002
@@ -1355,7 +1360,7 @@ AT.IT.120.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Test${/}Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Test${/}Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.121.001
@@ -1365,7 +1370,7 @@ AT.IT.121.001
     Copy File                @{DIFFSET2.fileAlist}[0]   A.dir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  A.dir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.121.002
@@ -1375,7 +1380,7 @@ AT.IT.121.002
     Copy File                @{DIFFSET1.fileAlist}[0]   A.dir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  A.dir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.122.001
@@ -1385,7 +1390,7 @@ AT.IT.122.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   B.dir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  B.dir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.122.002
@@ -1395,7 +1400,7 @@ AT.IT.122.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   B.dir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  B.dir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.123.001
@@ -1405,7 +1410,7 @@ AT.IT.123.001
     Copy File                @{DIFFSET2.fileAlist}[0]   A_dir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  A_dir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.123.002
@@ -1415,7 +1420,7 @@ AT.IT.123.002
     Copy File                @{DIFFSET1.fileAlist}[0]   A_dir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  A_dir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.124.001
@@ -1425,7 +1430,7 @@ AT.IT.124.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   B_dir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  B_dir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.124.002
@@ -1435,7 +1440,7 @@ AT.IT.124.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   B_dir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  B_dir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.125.001
@@ -1445,7 +1450,7 @@ AT.IT.125.001
     Copy File                @{DIFFSET2.fileAlist}[0]   A dir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  A dir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.125.002
@@ -1455,7 +1460,7 @@ AT.IT.125.002
     Copy File                @{DIFFSET1.fileAlist}[0]   A dir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  A dir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.126.001
@@ -1465,7 +1470,7 @@ AT.IT.126.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   B dir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  B dir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.126.002
@@ -1475,7 +1480,7 @@ AT.IT.126.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   B dir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  B dir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.127.001
@@ -1485,7 +1490,7 @@ AT.IT.127.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}File.A.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.127.002
@@ -1495,7 +1500,7 @@ AT.IT.127.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}File.A.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.128.001
@@ -1505,7 +1510,7 @@ AT.IT.128.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}File.B.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.128.002
@@ -1515,7 +1520,7 @@ AT.IT.128.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}File.B.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.129.001
@@ -1525,7 +1530,7 @@ AT.IT.129.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}File_A.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.129.002
@@ -1535,7 +1540,7 @@ AT.IT.129.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}File_A.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.130.001
@@ -1545,7 +1550,7 @@ AT.IT.130.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}File_B.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.130.002
@@ -1555,7 +1560,7 @@ AT.IT.130.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}File_B.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.131.001
@@ -1565,7 +1570,7 @@ AT.IT.131.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}File A.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.131.002
@@ -1575,7 +1580,7 @@ AT.IT.131.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}File A.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.132.001
@@ -1585,7 +1590,7 @@ AT.IT.132.001
     Copy File                @{DIFFSET2.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET2.fileBlist}[0]   Bdir${/}File B.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET2.counts}
 
 AT.IT.132.002
@@ -1595,7 +1600,7 @@ AT.IT.132.002
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}File B.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-
+    Response Status Check    0  0  0  0  0
     UCC Diff Results         @{DIFFSET1.counts}
 
 AT.IT.133.001

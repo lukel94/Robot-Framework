@@ -1,7 +1,7 @@
 import os
 import os.path
 import subprocess
-import sys
+import fnmatch
 import re
 import csv
 import zipfile
@@ -20,12 +20,14 @@ class UCCTestLibrary(object):
         self._ucc_command = "UCC"
         self._status = ''
         self._tmp_outdir = "output/tmp"
+        self._log = ''
 
     def display_version(self):
         self._run_command('-v')
 
     def run_ucc(self, *args):
         self._run_command(*args)
+        self._read_log()
 
     def response_should_be(self, expected_status):
         if expected_status != self._status:
@@ -58,6 +60,13 @@ class UCCTestLibrary(object):
         t_end = time.time ()
         with open("time", "w") as f:
            f.write (str(t_end-t_start))
+
+    def _read_log(self):
+        for file in os.listdir('.'):
+            if fnmatch.fnmatch(file, '*.log'):
+                with open(file, 'r') as log:
+                    self._log = log.read()
+
 
     def time_limit (self, limit):
         limit = float (limit)
@@ -166,21 +175,21 @@ class UCCTestLibrary(object):
 
 
     def response_status_check(self, sdump, error, warn, info, ufile):
-        if not re.search("Stack Dumps:  " + sdump.strip(), self._status):
+        if not re.search("Stack Dumps:  " + sdump.strip(), self._log):
             raise AssertionError("Expected '%s' stack dumps not in response '%s'."
-                    % (sdump, self._status))
-        if not re.search("Errors:  " + error.strip(), self._status):
+                    % (sdump, self._log))
+        if not re.search("Errors:  " + error.strip(), self._log):
             raise AssertionError("Expected '%s' errors not in response '%s'."
-                    % (error, self._status))
-        if not re.search("Warnings:  " + warn.strip(), self._status):
+                    % (error, self._log))
+        if not re.search("Warnings:  " + warn.strip(), self._log):
             raise AssertionError("Expected '%s' warnings not in response '%s'."
-                    % (warn, self._status))
-        if not re.search("Information:  " + info.strip(), self._status):
+                    % (warn, self._log))
+        if not re.search("Information:  " + info.strip(), self._log):
             raise AssertionError("Expected '%s' information not in response '%s'."
-                    % (info, self._status))
-        if not re.search("Uncounted Files:  " + ufile.strip(), self._status):
+                    % (info, self._log))
+        if not re.search("Uncounted Files:  " + ufile.strip(), self._log):
             raise AssertionError("Expected '%s' uncounted files not in response '%s'."
-                    % (ufile, self._status))
+                    % (ufile, self._log))
 
     def is_ucc_response_error(self, msg):
         pos=self._status.find(msg)
