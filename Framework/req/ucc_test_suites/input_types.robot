@@ -786,7 +786,7 @@ AT.IT.079.001
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create UCC file list    customFileList.txt  req/ucc_input/MainObject.cpp
     ...  req/ucc_input/MainObject.h
-    Run UCC    java  -jar  @{UCC BASE}             -d  -i2  customFileList.txt  -i1  fileListA.txt
+    Run UCC    java  -jar  @{UCC BASE}             -d  -i1  fileListA.txt  -i2  customFileList.txt  
     Baseline B output should contain    MainObject.cpp  MainObject.h
 
 AT.IT.080.001
@@ -806,7 +806,7 @@ AT.IT.081.001
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create UCC file list    customFileList.txt  req/ucc_input/MainObject.cpp
     ...  req/ucc_input/MainObject.h
-    Run UCC    java  -jar  @{UCC BASE}             -d  -i2  customFileList.txt  -i1  fileListA.txt
+    Run UCC    java  -jar  @{UCC BASE}             -d  -i1  fileListA.txt  -i2  customFileList.txt
     Baseline B output should contain    MainObject.cpp  MainObject.h
 
 AT.IT.082.001
@@ -816,7 +816,7 @@ AT.IT.082.001
     ...  req/ucc_input/MainObject.cpp;ucc_input/MainObject.h
     Create baseline B file list     @{BASELINE B FILE LIST}
     Run UCC    java  -jar  @{UCC BASE}             -d  -i1  customFileList.txt  -i2  fileListB.txt
-    Response should contain     Error: Unable to open file
+    Response should contain     Invalid file list
 
 AT.IT.083.001
     [Documentation]  UCC should not require delimiters (other than new line)
@@ -824,8 +824,8 @@ AT.IT.083.001
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create UCC file list    customFileList.txt
     ...  req/ucc_input/MainObject.cpp;ucc_input/MainObject.h
-    Run UCC    java  -jar  @{UCC BASE}             -d  -i2  customFileList.txt  -i1  fileListA.txt
-    Response should contain     Error: Unable to open file
+    Run UCC    java  -jar  @{UCC BASE}             -d  -i1  fileListA.txt  -i2  customFileList.txt
+    Response should contain     Invalid file list
 
 AT.IT.084.001
     [Documentation]  UCC should allow periods in the file names listed in
@@ -840,7 +840,7 @@ AT.IT.085.001
     ...              the custom file list for Baseline B.
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create UCC file list    customFileList.txt  @{PERIOD DEFAULT FILE LIST}
-    Run UCC    java  -jar  @{UCC BASE}             -d  -i2  customFileList.txt  -i1  fileListA.txt
+    Run UCC    java  -jar  @{UCC BASE}             -d  -i1  fileListA.txt  -i2  customFileList.txt
     Baseline B output should contain    cc.main.cpp
 
 AT.IT.086.001
@@ -856,7 +856,7 @@ AT.IT.087.001
     ...              in the custom file list for Baseline B.
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create UCC file list    customFileList.txt  @{UNDERSCORE DEFAULT FILE LIST}
-    Run UCC    java  -jar  @{UCC BASE}             -d  -i2  customFileList.txt  -i1  fileListA.txt
+    Run UCC    java  -jar  @{UCC BASE}             -d  -i1  fileListA.txt  -i2  customFileList.txt
     Baseline B output should contain    cc_main.cpp
 
 AT.IT.088.001
@@ -872,7 +872,7 @@ AT.IT.089.001
     ...              in the custom file list for Baseline B.
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create UCC file list    customFileList.txt  @{SPACE DEFAULT FILE LIST}
-    Run UCC    java  -jar  @{UCC BASE}             -d  -i2  customFileList.txt  -i1  fileListA.txt
+    Run UCC    java  -jar  @{UCC BASE}             -d  -i1  fileListA.txt  -i2  customFileList.txt
     Baseline B output should contain    cc main.cpp
 
 AT.IT.090.001
@@ -890,7 +890,7 @@ AT.IT.091.001
     ...              specified using full paths.
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create UCC full path file list   customFileList.txt  @{COUNT DEFAULT FILE LIST}
-    Run UCC    java  -jar  @{UCC BASE}	          -d  -i2  customFileList.txt  -i1  fileListA.txt
+    Run UCC    java  -jar  @{UCC BASE}	          -d  -i1  fileListA.txt  -i2  customFileList.txt
     Baseline B output should contain    cc_main.cpp  MainObject.cpp
 
 AT.IT.092.001
@@ -908,7 +908,7 @@ AT.IT.093.001
     ...              specified using relative paths, with respect to the executable's location.
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create UCC file list   customFileList.txt  @{COUNT DEFAULT FILE LIST}
-    Run UCC    java  -jar  @{UCC BASE}	          -d  -i2  customFileList.txt  -i1  fileListA.txt
+    Run UCC    java  -jar  @{UCC BASE}	          -d  -i1  fileListA.txt  -i2  customFileList.txt
     Baseline B output should contain    cc_main.cpp  MainObject.cpp
 
 AT.IT.094.001
@@ -924,7 +924,7 @@ AT.IT.095.001
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create UCC file list    custom.file.list.txt  req/ucc_input/MainObject.cpp
     ...  req/ucc_input/MainObject.h
-    Run UCC    java  -jar  @{UCC BASE}             -d  -i2  custom.file.list.txt  -i1  fileListA.txt
+    Run UCC    java  -jar  @{UCC BASE}             -d  -i1  fileListA.txt  -i2  custom.file.list.txt
     Baseline B output should contain    MainObject.cpp  MainObject.h
 
 AT.IT.096.001
@@ -940,7 +940,7 @@ AT.IT.097.001
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create UCC file list    custom_file_list.txt  req/ucc_input/MainObject.cpp
     ...  req/ucc_input/MainObject.h
-    Run UCC    java  -jar  @{UCC BASE}             -d  -i2  custom_file_list.txt  -i1  fileListA.txt
+    Run UCC    java  -jar  @{UCC BASE}             -d  -i1  fileListA.txt  -i2  custom_file_list.txt
     Baseline B output should contain    MainObject.cpp  MainObject.h
 
 AT.IT.098.001
@@ -993,7 +993,7 @@ AT.IT.100.001
     Copy File                @{DIFFSET3.fileBlist}[0]   FileB1.cpp
     Copy File                @{DIFFSET3.fileBlist}[1]   FileB2.cpp
     Run UCC   java  -jar  @{UCC BASE}               -d  -i1  FileListA.txt  FileListA1.txt  -i2  FileListB.txt
-    Is UCC Response Error    Error: FileListA1.txt is not a valid UCC command line argument.
+    Is UCC Response Error    Argument 'filelista1.txt' is not supported by UCC-G
 
 AT.IT.101.001
     [Documentation]          Multiple filenames listed in same line for custom file list in Baseline B.
@@ -1005,7 +1005,7 @@ AT.IT.101.001
     Copy File                @{DIFFSET3.fileBlist}[0]   FileB1.cpp
     Copy File                @{DIFFSET3.fileBlist}[1]   FileB2.cpp
     Run UCC   java  -jar  @{UCC BASE}               -d  -i1  FileListA.txt  -i2  FileListB.txt  FileListB1.txt
-    Is UCC Response Error    Error: FileListB1.txt is not a valid UCC command line argument.
+    Is UCC Response Error    Argument 'filelistb1.txt' is not supported by UCC-G.
 
 AT.IT.102.001
     [Documentation]          Allow specification of full pathname for custom file list for Baseline A.
@@ -1240,7 +1240,7 @@ AT.IT.112.002
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create UCC File List    customFileList.txt  req/ucc_input/test/sub_dir/MainObject.cpp
     ...  req/ucc_input/test/sub_dir/invalid_file.h
-    Run UCC    java  -jar  @{UCC BASE}             -d  -i2  customFileList.txt  -i1  fileListA.txt
+    Run UCC    java  -jar  @{UCC BASE}             -d  -i1  fileListA.txt  -i2  customFileList.txt
     Response should contain     Error: Unable to open file
 
 AT.IT.113.001
@@ -1249,7 +1249,7 @@ AT.IT.113.001
     Create UCC File List     FileListB.txt      FileB1.cpp
     Copy File                @{DIFFSET1.fileBlist}[0]   FileB1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  FileListB.txt
-    Is UCC Response Error    Error: -i1 \ Unable to open Baseline A file (FileListA.txt)
+    Is UCC Response Error    Invalid file list: FileListA.txt
 
 AT.IT.114.001
     [Documentation]          Error when invalid filenames specified for custom file list in Baseline B.
@@ -1257,7 +1257,7 @@ AT.IT.114.001
     Create UCC File List     FileListA.txt      FileA1.cpp
     Copy File                @{DIFFSET1.fileAlist}[0]   FileA1.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -i1  FileListA.txt  -i2  FileListB.txt
-    Is UCC Response Error    Error: -i2 \ Unable to open Baseline B file (FileListB.txt)
+    Is UCC Response Error    Invalid file list: FileListB.txt
 
 AT.IT.115.001
     [Documentation]          Use directories for Baseline A and Baseline B for differencing.
@@ -1609,7 +1609,7 @@ AT.IT.133.001
     Create Directory         Bdir
     Copy File                @{DIFFSET1.fileBlist}[0]   Bdir${/}FileB.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Is UCC Response Error    Error: -dir \ Invalid Baseline A directory: (Adir) either not found or not a directory.
+    Is UCC Response Error    No files found at directory path
 
 AT.IT.134.001
     [Documentation]          Error when invalid directory is specified for Baseline B during differencing.
@@ -1617,7 +1617,7 @@ AT.IT.134.001
     Create Directory         Adir
     Copy File                @{DIFFSET1.fileAlist}[0]   Adir${/}FileA.cpp
     Run UCC    java  -jar  @{UCC BASE}                  -d  -dir  Adir  Bdir
-    Is UCC Response Error    Error: -dir \ Invalid Baseline B directory: (Bdir) either not found or not a directory.
+    Is UCC Response Error    No files found at directory path
 
 AT.IT.135.001
     [Documentation]          Allow user to specify file extensions using wildcard character * for differencing.
@@ -1690,4 +1690,5 @@ AT.IT.135.004
     Baseline A Output should not contain   FileA.cpp
     Baseline B Output should not contain   FileB.cpp
     UCC Diff Results         @{DIFFSET3.counts}
-vim:tw=0:wm=0:nowrap
+
+# vim:tw=0:wm=0:nowrap
