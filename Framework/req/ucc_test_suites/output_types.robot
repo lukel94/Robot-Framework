@@ -395,29 +395,29 @@ AT.INT.001.001
 	Create default file list     @{DEFAULT FILE LIST}
 	Run UCC                 java  -jar  @{UCC BASE}
 	File should exist		outfile_cplx.csv	outfile_summary.csv
-	Time limit		5
+	Time limit		11
 
 AT.INT.002.001
 	[Documentation]			Check if UCC throws an error with version switch
 	Run UCC                 java  -jar  @{UCC BASE}  -v
-	Response should contain 	UCC version
+	Response should contain 	Version
 	Time limit		5
 
 AT.INT.003.001
-	[Documentation]			Check if UCC shows status on the command line
-	Run UCC                 java  -jar  @{UCC BASE}  -dir  @{DIRECTORY}  *.cpp
-	Response should contain 	Building list of source files
-	File should exist		outfile_cplx.csv	outfile_summary.csv
-	Time limit		5
+    [Documentation]         Check if UCC shows status on the command line
+    Run UCC                 java  -jar  @{UCC BASE}  -dir  @{DIRECTORY}  *.cpp
+    Response should contain     Processing counter request...
+    File should exist       outfile_cplx.csv    outfile_summary.csv
+    Time limit      11
 
 AT.INT.004.001
-	[Documentation]			Check if UCC runs differencing with default filelists
+    [Documentation]         Check if UCC runs differencing with default filelists
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create baseline B file list     @{BASELINE B FILE LIST}
-	Run UCC                 java  -jar  @{UCC BASE}  -d
-	Response should contain 	Building list of source files
-	File should exist		MatchedPairs.csv	outfile_diff_results.csv
-	Time limit		5
+    Run UCC                 java  -jar  @{UCC BASE}  -d
+    Response should contain     Processing differencer request...
+    File should exist       MatchedPairs.csv    outfile_diff_results.csv
+    Time limit      11
 
 AT.INT.005.001
 	[Documentation]			Check if UCC runs differencing with threshold set
@@ -486,28 +486,28 @@ AT.INT.013.001
     Create baseline B file list     @{BASELINE B FILE LIST}
 	Run UCC                 java  -jar  @{UCC BASE}  -d 	-i1		filelistA.txt	-i2		filelistB.txt	-tdup 	12
 	File should exist		MatchedPairs.csv	outfile_diff_results.csv
-	Time limit		5
+	Time limit		11
 
 AT.INT.014.001
 	[Documentation]			Manually check if UCC throws an error with negative tdup value
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create baseline B file list     @{BASELINE B FILE LIST}
 	Run UCC                 java  -jar  @{UCC BASE}  -d 	-i1		filelistA.txt	-i2		filelistB.txt	-tdup  -10
-	Time limit		5
+	Time limit		11
 
 AT.INT.015.001
 	[Documentation]			Manually check if UCC throws an error with string  tdup value
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create baseline B file list     @{BASELINE B FILE LIST}
 	Run UCC                 java  -jar  @{UCC BASE}  -d 	-i1		filelistA.txt	-i2		filelistB.txt	-tdup  "string"
-	Time limit		5
+	Time limit		11
 
 AT.INT.016.001
 	[Documentation]			Manually check if UCC throws an error when the argument integers is out of bounds
     Create baseline A file list     @{BASELINE A FILE LIST}
     Create baseline B file list     @{BASELINE B FILE LIST}
 	Run UCC                 java  -jar  @{UCC BASE}  -d 	-i1		filelistA.txt	-i2		filelistB.txt	-tdup  112
-	Time limit		5
+	Time limit		11
 
 
 AT.INT.017.001
@@ -516,7 +516,7 @@ AT.INT.017.001
     Create baseline B file list     @{BASELINE A FILE LIST}
 	Run UCC                 java  -jar  @{UCC BASE}  -d 	-i1		filelistA.txt	-i2		filelistB.txt	-nodup
 	File should exist		MatchedPairs.csv	outfile_diff_results.csv
-	Time limit		5
+	Time limit		11
 
 AT.INT.018.001
 	[Documentation]			Check if UCC runs with nolinks option
@@ -524,14 +524,14 @@ AT.INT.018.001
     Create baseline B file list     @{BASELINE B FILE LIST}
 	Run UCC                 java  -jar  @{UCC BASE}  -d 	-i1		filelistA.txt	-i2		filelistB.txt	-nolinks
 	File should exist		MatchedPairs.csv	outfile_diff_results.csv
-	Time limit		5
+	Time limit		11
 
 AT.INT.019.001
 	[Documentation]			Check if UCC runs with unified option
 	Create default file list     @{DEFAULT FILE LIST}
 	Run UCC                 java  -jar  @{UCC BASE}  -unified
 	File should exist		outfile_summary.csv
-	Time limit		5
+	Time limit		13.5
 
 AT.INT.020.001
 	[Documentation]			Check if UCC runs with legacy option
@@ -546,7 +546,7 @@ AT.INT.021.001
     Create baseline B file list     @{BASELINE B FILE LIST}
 	Run UCC                 java  -jar  @{UCC BASE}  -d 	-i1		filelistA.txt	-i2		filelistB.txt	-nocomplex
 	File should exist		MatchedPairs.csv	outfile_diff_results.csv
-	Time limit		5
+	Time limit		11
 
 AT.INT.022.001
 	[Documentation]			Check if UCC runs with visualdiff option and threads
@@ -672,31 +672,31 @@ AT.MAIN.001.001
 	[Documentation]			Manually check if Physical SLOC is 170 and Logical SLOC is 97 in outfile_summary
 	Run UCC                 java  -jar  @{UCC BASE} 		-dir	  @{MAINTENANCE CSHARP SINGLE SOURCE}  GetChocolatey.cs
 	File should exist 		outfile_summary.csv
-	Time limit		0.35
+	Time limit		6.5
 
 AT.MAIN.002.001
 	[Documentation]			Manually check if Physical SLOC is 32544 and Logical SLOC is 18319 in outfile_summary
 	Run UCC                 java  -jar  @{UCC BASE} 		-dir	  @{MAINTENANCE CSHARP ALL SOURCE}  *.cs
 	File should exist 		outfile_summary.csv
-	Time limit		5
+	Time limit		22.5
 
 AT.MAIN.003.001
 	[Documentation]			UCC should generate output summary file for Matlab files
 	Run UCC                 java  -jar  @{UCC BASE} 		-dir	  @{MAINTENANCE MATLAB ALL SOURCE}  *.m
 	File should exist 		outfile_summary.csv
-	Time limit		0.35
+	Time limit		6.5
 
 AT.MAIN.004.001
 	[Documentation]			UCC should generate output summary file for a Python file with unterminated literal string
 	Run UCC                 java  -jar  @{UCC BASE} 		-dir	  @{MAINTENANCE PYTHON SINGLE SOURCE}  a.py
 	File should exist 		outfile_summary.csv
-	Time limit		0.35
+	Time limit		6
 
 AT.MAIN.005.001
 	[Documentation]			UCC should not crash when processing cyclomatic complexity for python files.
 	Run UCC                 java  -jar  @{UCC BASE} 		-dir	  @{MAINTENANCE PYTHON CYCLOMATIC SOURCE}  *.py
 	File should exist 		outfile_summary.csv
-	Time limit		0.35
+	Time limit		6
 
 AT.OE.001.001
 	[Documentation] 		UCC should generate output summary file for valid header
