@@ -11,7 +11,7 @@ else
 	    case ${arg[$i]} in
 	    -team)
 		TEAMNAME="${arg[$i+1]}"
-		if [ \( ! -z "$TEAMNAME" \) -a \( -d "../UCC/$TEAMNAME" \) ]; then
+		if [ ! -z "$TEAMNAME" ]; then
 			echo "true team"
 		else
 			echo "Invalid team name"
@@ -41,8 +41,8 @@ if [ $TEAMNAME = "none" ]; then
 	exit 0
 fi
 
-make -C ../UCC/$TEAMNAME
-cp ../UCC/$TEAMNAME/bin/UCC ./ucc_executables/
+# make -C ../UCC/$TEAMNAME
+# cp ../UCC/$TEAMNAME/bin/UCC ./ucc_executables/
 mkdir -p output/tmp
 
 
@@ -81,8 +81,8 @@ else
 fi
 
 rm -rf output/tmp
-rm -rf ../UCC/$TEAMNAME/*
-rm ucc_executables/UCC	
+# rm -rf ../UCC/$TEAMNAME/*
+# rm ucc_executables/UCC	
 
 
 
