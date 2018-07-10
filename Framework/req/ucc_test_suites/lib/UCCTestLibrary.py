@@ -1,7 +1,6 @@
 import os
 import os.path
 import subprocess
-import fnmatch
 import re
 import csv
 import zipfile
@@ -62,11 +61,12 @@ class UCCTestLibrary(object):
            f.write (str(t_end-t_start))
 
     def _read_log(self):
-        for file in os.listdir('.'):
-            if fnmatch.fnmatch(file, '*.log'):
-                with open(file, 'r') as log:
-                    self._log = log.read()
-
+        for root, dirs, files in os.walk('./'):
+            for file in files:
+                if file.endswith('.log'):
+                    filepath = os.path.join(root, file)
+                    with open(filepath, 'r') as log:
+                        self._log = log.read()
 
     def time_limit (self, limit):
         limit = float (limit)
@@ -76,7 +76,6 @@ class UCCTestLibrary(object):
                 raise Exception("Time limit exceeded. Execution time was '%s' and limit was '%s'."
                     % (str(real_time) , str(limit) )
                 )
-
 
     def _parse_matched_pairs_file(self):
         with open('MatchedPairs.csv', 'r') as fh:
@@ -254,6 +253,20 @@ class UCCTestLibrary(object):
             if not filename.endswith(".py"):
                 shutil.move(filename, test_outdir)
 
+    def sloc_check(self, psloc, lsloc):
+        with open('outfile_summary.csv','r') as fh:
+            csvr = csv.reader(fh)
+            rows = list(csvr)[6:]
+            for i in range(len(rows)):
+                if len(rows[i]) > 3 and rows[i][2] == 'Physical':
+                    fh_psloc = rows[i+2][2]
+                if len(rows[i]) > 3 and rows[i][3] == 'Logical':
+                    fh_lsloc = rows[i+2][3]
+                    break
+            if fh_psloc != str(psloc) or fh_lsloc != str(lsloc):
+                raise Exception("Wrong SLOC results. Excepted Physical SLOC, Logical SLOC to be '%s', '%s', but were '%s', '%s'."
+                    % (str(psloc) , str(lsloc), fh_psloc, fh_lsloc)
+                )
 
     def get_absolute_path(self, path):
         return os.path.abspath(path)
