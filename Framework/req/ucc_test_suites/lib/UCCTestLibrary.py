@@ -268,5 +268,15 @@ class UCCTestLibrary(object):
                     % (str(psloc) , str(lsloc), fh_psloc, fh_lsloc)
                 )
 
+    def log_should_contain(self, expected_status):
+        if expected_status not in self._log:
+            raise AssertionError("Log '%s' does not contain '%s'."
+                % (self._log, expected_status))
+
+    def log_should_match(self, expected_status):
+        if not re.search(expected_status, self._log):
+            raise AssertionError("Log '%s' does not contain '%s'."
+                    % (self._log, expected_status))
+
     def get_absolute_path(self, path):
         return os.path.abspath(path)
