@@ -280,3 +280,25 @@ class UCCTestLibrary(object):
 
     def get_absolute_path(self, path):
         return os.path.abspath(path)
+
+    #7.2 ji
+    # for exact output sentence
+    def log_should_contain(self, expected_status):
+        if expected_status not in self._log:
+            raise AssertionError("Log '%s' does not contain '%s'."
+                % (self._log, expected_status))
+            
+    # for regex
+    def log_should_match(self, expected_status):
+        if not re.search(expected_status, self._log):
+            raise AssertionError("Log '%s' does not contain '%s'."
+                    % (self._log, expected_status))
+
+    # for multiple language count ji 7.17
+    def ucc_count_multi_results(self, nof, psloc, lsloc):
+        with open('outfile_summary.csv', 'r') as fh:
+            csvr = list(csv.reader(fh))
+            row = csvr[len(csvr)-1]
+            if (int(nof) != int(row[1]) or int(psloc) != int(row[2]) or int(lsloc) != int(row[3])):
+                raise AssertionError("Expected count values '%s' '%s' '%s' different from obtained '%s'"
+                    % (nof, psloc,lsloc,','.join(row)))
